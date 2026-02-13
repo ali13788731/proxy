@@ -1,52 +1,54 @@
 import requests
 import re
 import json
-import base64
 
-# لیست منابع (می‌توانید منابع بیشتری اضافه کنید)
+# منابع معتبر و تازه برای پروکسی‌های مخصوص ایران
 SOURCES = [
-    "https://raw.githubusercontent.com/TheSpeedX/SOCKS-List/master/http.txt",
-    "https://raw.githubusercontent.com/hookzof/socks5_list/master/proxy.txt",
-    "https://raw.githubusercontent.com/SoroushApps/Proxy-List/main/MTProto.txt" # منبع خوب برای MTProto
+    "https://raw.githubusercontent.com/yebekhe/TelegramVipProxy/main/output/proxies.txt",
+    "https://raw.githubusercontent.com/vfarid/proxy-list/main/all.txt",
+    "https://raw.githubusercontent.com/BardiaFA/Proxy-List/main/MTProto.txt",
+    "https://raw.githubusercontent.com/Emsadraee/TelegramProxy/main/proxy.txt"
 ]
 
-def parse_mtproto(link):
-    """اطلاعات سرور، پورت و سکرت را از لینک استخراج می‌کند"""
-    try:
-        server = re.search(r'server=([^&]+)', link).group(1)
-        port = re.search(r'port=([^&]+)', link).group(1)
-        secret = re.search(r'secret=([^&]+)', link).group(1)
-        return {"server": server, "port": port, "secret": secret, "link": link, "type": "mtproto"}
-    except:
-        return None
+def parse_mtproto(text):
+    proxies = []
+    # پیدا کردن لینک‌های تلگرامی
+    links = re.findall(r'(tg://proxy\?[^\s"<>]+|https://t\.me/proxy\?[^\s"<>]+)', text)
+    
+    for link in links:
+        try:
+            server = re.search(r'server=([^&]+)', link).group(1)
+            port = re.search(r'port=([^&]+)', link).group(1)
+            secret = re.search(r'secret=([^&]+)', link).group(1)
+            proxies.append({
+                "server": server,
+                "port": port,
+                "secret": secret,
+                "link": link.replace("https://t.me/proxy?", "tg://proxy?") # استانداردسازی برای اپلیکیشن
+            })
+        except:
+            continue
+    return proxies
 
 def main():
-    proxies = []
-    
-    # 1. دانلود و استخراج لینک‌ها
+    all_proxies = []
     for url in SOURCES:
         try:
-            print(f"Fetching {url}...")
-            resp = requests.get(url, timeout=10)
-            # پیدا کردن تمام لینک‌های MTProto
-            found_links = re.findall(r'(tg://proxy\?[^\s"]+|https://t\.me/proxy\?[^\s"]+)', resp.text)
-            
-            for link in found_links:
-                data = parse_mtproto(link)
-                if data:
-                    proxies.append(data)
+            print(f"در حال دریافت از: {url}")
+            r = requests.get(url, timeout=15)
+            if r.status_code == 200:
+                extracted = parse_mtproto(r.text)
+                all_proxies.extend(extracted)
         except Exception as e:
-            print(f"Error fetching {url}: {e}")
+            print(f"خطا در منبع {url}: {e}")
 
-    # 2. حذف تکراری‌ها
-    unique_proxies = {v['server']:v for v in proxies}.values()
-    final_list = list(unique_proxies)
+    # حذف تکراری‌ها بر اساس سرور
+    unique_list = {v['server']:v for v in all_proxies}.values()
+    final_data = list(unique_list)[:100] # فقط ۱۰۰ مورد اول برای سرعت بالا
 
-    # 3. ذخیره در فایل JSON
     with open("proxies.json", "w", encoding="utf-8") as f:
-        json.dump(final_list, f, indent=4)
-    
-    print(f"✅ Successfully saved {len(final_list)} proxies to proxies.json")
+        json.dump(final_data, f, indent=4)
+    print(f"پایان! {len(final_data)} پروکسی ذخیره شد.")
 
 if __name__ == "__main__":
     main()
