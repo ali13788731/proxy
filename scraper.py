@@ -2,53 +2,49 @@ import requests
 import re
 import json
 
-# منابع معتبر و تازه برای پروکسی‌های مخصوص ایران
+# منابعی که پروکسی‌های سالم و تازه دارند
 SOURCES = [
     "https://raw.githubusercontent.com/yebekhe/TelegramVipProxy/main/output/proxies.txt",
     "https://raw.githubusercontent.com/vfarid/proxy-list/main/all.txt",
-    "https://raw.githubusercontent.com/BardiaFA/Proxy-List/main/MTProto.txt",
-    "https://raw.githubusercontent.com/Emsadraee/TelegramProxy/main/proxy.txt"
+    "https://raw.githubusercontent.com/LalatinaHub/Telegram-Proxie/master/Proxy-List.txt"
 ]
 
-def parse_mtproto(text):
-    proxies = []
-    # پیدا کردن لینک‌های تلگرامی
-    links = re.findall(r'(tg://proxy\?[^\s"<>]+|https://t\.me/proxy\?[^\s"<>]+)', text)
-    
-    for link in links:
-        try:
-            server = re.search(r'server=([^&]+)', link).group(1)
-            port = re.search(r'port=([^&]+)', link).group(1)
-            secret = re.search(r'secret=([^&]+)', link).group(1)
-            proxies.append({
-                "server": server,
-                "port": port,
-                "secret": secret,
-                "link": link.replace("https://t.me/proxy?", "tg://proxy?") # استانداردسازی برای اپلیکیشن
-            })
-        except:
-            continue
-    return proxies
-
 def main():
-    all_proxies = []
+    proxies = []
+    print("شروع استخراج...")
+    
     for url in SOURCES:
         try:
-            print(f"در حال دریافت از: {url}")
             r = requests.get(url, timeout=15)
-            if r.status_code == 200:
-                extracted = parse_mtproto(r.text)
-                all_proxies.extend(extracted)
+            # جستجوی تمام لینک‌های مربوط به پروکسی تلگرام
+            found = re.findall(r'tg://proxy\?[^\s"<>]+', r.text)
+            print(f"پیدا شد در {url}: {len(found)} مورد")
+            
+            for link in found:
+                try:
+                    # استخراج اطلاعات از لینک
+                    server = re.search(r'server=([^&]+)', link).group(1)
+                    port = re.search(r'port=([^&]+)', link).group(1)
+                    secret = re.search(r'secret=([^&]+)', link).group(1)
+                    proxies.append({
+                        "server": server,
+                        "port": port,
+                        "secret": secret,
+                        "link": link
+                    })
+                except:
+                    continue
         except Exception as e:
-            print(f"خطا در منبع {url}: {e}")
+            print(f"خطا در {url}: {e}")
 
-    # حذف تکراری‌ها بر اساس سرور
-    unique_list = {v['server']:v for v in all_proxies}.values()
-    final_data = list(unique_list)[:100] # فقط ۱۰۰ مورد اول برای سرعت بالا
+    # حذف تکراری‌ها
+    final_data = {v['server']:v for v in proxies}.values()
+    final_list = list(final_data)[:50] # گرفتن ۵۰ تای اول برای سرعت
 
     with open("proxies.json", "w", encoding="utf-8") as f:
-        json.dump(final_data, f, indent=4)
-    print(f"پایان! {len(final_data)} پروکسی ذخیره شد.")
+        json.dump(final_list, f, indent=4)
+    
+    print(f"مجموعاً {len(final_list)} پروکسی ذخیره شد.")
 
 if __name__ == "__main__":
     main()
