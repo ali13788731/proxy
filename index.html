@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>پروکسی‌یاب هوشمند</title>
+    <style>
+        body { font-family: sans-serif; background: #f0f2f5; text-align: center; padding: 20px; }
+        h2 { color: #333; }
+        .status { margin-bottom: 20px; font-weight: bold; color: #555; }
+        .card { 
+            background: white; margin: 10px auto; padding: 15px; 
+            border-radius: 12px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); 
+            max-width: 400px; display: flex; justify-content: space-between; align-items: center;
+        }
+        .info { text-align: right; }
+        .ip { font-size: 14px; font-weight: bold; }
+        .btn { 
+            text-decoration: none; padding: 8px 15px; border-radius: 8px; 
+            color: white; font-weight: bold; font-size: 14px;
+        }
+        .checking { border-right: 5px solid orange; }
+        .online { border-right: 5px solid #2ecc71; }
+        .offline { display: none; } /* مخفی کردن خراب‌ها */
+        .btn-connect { background: #0088cc; }
+    </style>
+</head>
+<body>
+
+    <h2>⚡ پروکسی‌های فعال برای شما</h2>
+    <div class="status" id="status-text">در حال دریافت لیست و تست سرعت...</div>
+    <div id="list"></div>
+
+    <script>
+        const PROXY_JSON_URL = 'proxies.json'; 
+
+        async function checkConnection(ip, port) {
+            const controller = new AbortController();
+            const timeoutId = setTimeout(() => controller.abort(), 2000); // 2 ثانیه زمان برای تست
+            
+            try {
+                // تلاش برای اتصال به پورت (تکنیک Fetch No-Cors)
+                await fetch(`http://${ip}:${port}`, { 
+                    mode: 'no-cors', 
+                    signal: controller.signal 
+                });
+                return true; // اگر ارور شبکه ندهد، یعنی پورت باز است
+            } catch (error) {
+                // اگر AbortError باشد یعنی تایم‌اوت شده (فیلتر یا بسته است)
+                return error.name !== 'AbortError';
+            }
+        }
+
+        async function init() {
+            try {
+                const response = await fetch(PROXY_JSON_URL);
+                const proxies = await response.json();
+                const listDiv = document.getElementById('list');
+                
+                document.getElementById('status-text').innerText = `تست ${proxies.length} پروکسی...`;
+
+                let workingCount = 0;
+
+                for (const p of proxies) {
+                    // ساخت کارت (ابتدا مخفی یا در حال تست)
+                    const card = document.createElement('div');
+                    card.className = 'card checking';
+                    card.innerHTML = `
+                        <div class="info">
+                            <div class="ip">${p.server}</div>
+                            <small>Port: ${p.port}</small>
+                        </div>
+                        <a href="${p.link}" class="btn btn-connect">اتصال</a>
+                    `;
+                    listDiv.appendChild(card);
+
+                    // انجام تست واقعی
+                    const isAlive = await checkConnection(p.server, p.port);
+
+                    if (isAlive) {
+                        card.className = 'card online'; // سبز می‌شود
+                        workingCount++;
+                    } else {
+                        card.className = 'card offline'; // حذف می‌شود
+                        card.remove();
+                    }
+                }
+                document.getElementById('status-text').innerText = `پایان تست: ${workingCount} پروکسی فعال یافت شد.`;
+
+            } catch (e) {
+                document.getElementById('status-text').innerText = "خطا در دریافت لیست.";
+                console.log(e);
+            }
+        }
+
+        init();
+    </script>
+</body>
+</html>
