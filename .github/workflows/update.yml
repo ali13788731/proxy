@@ -1,35 +1,29 @@
-name: Auto Update Proxies
-
+name: Proxy Auto Update
 on:
   schedule:
-    - cron: '0 * * * *' # اجرا سر هر ساعت
-  workflow_dispatch: # دکمه اجرای دستی
+    - cron: '0 * * * *'
+  workflow_dispatch:
 
 permissions:
-  contents: write # اجازه نوشتن فایل جیسون
+  contents: write
 
 jobs:
-  build:
+  update:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout Code
-        uses: actions/checkout@v3
-
-      - name: Setup Python
+      - uses: actions/checkout@v3
+      - name: Set up Python
         uses: actions/setup-python@v4
         with:
           python-version: '3.9'
-
-      - name: Install Libraries
+      - name: Install Dependencies
         run: pip install requests
-
       - name: Run Scraper
         run: python scraper.py
-
-      - name: Commit and Push
+      - name: Commit Changes
         run: |
-          git config --global user.name "GitHub Action"
-          git config --global user.email "action@github.com"
+          git config --local user.name "GitHub Action"
+          git config --local user.email "action@github.com"
           git add proxies.json
-          git commit -m "Update proxy list" || exit 0
+          git commit -m "Update Proxies $(date)" || exit 0
           git push
