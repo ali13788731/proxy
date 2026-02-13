@@ -2,49 +2,67 @@ import requests
 import re
 import json
 
-# منابعی که پروکسی‌های سالم و تازه دارند
-SOURCES = [
-    "https://raw.githubusercontent.com/yebekhe/TelegramVipProxy/main/output/proxies.txt",
-    "https://raw.githubusercontent.com/vfarid/proxy-list/main/all.txt",
-    "https://raw.githubusercontent.com/LalatinaHub/Telegram-Proxie/master/Proxy-List.txt"
+# لیست کانال‌های قوی پروکسی (نام کاربری بدون @)
+CHANNELS = [
+    "Myporoxy",
+    "TelMTProto",
+    "ProxyMTProto",
+    "mt_p_roxy",
+    "ProxyHagh",
+    "MTProtoProxies"
 ]
 
-def main():
-    proxies = []
-    print("شروع استخراج...")
+def scrape_channel(channel_name):
+    url = f"https://t.me/s/{channel_name}"
+    print(f"در حال بررسی کانال: {channel_name}...")
     
-    for url in SOURCES:
-        try:
-            r = requests.get(url, timeout=15)
-            # جستجوی تمام لینک‌های مربوط به پروکسی تلگرام
-            found = re.findall(r'tg://proxy\?[^\s"<>]+', r.text)
-            print(f"پیدا شد در {url}: {len(found)} مورد")
-            
-            for link in found:
-                try:
-                    # استخراج اطلاعات از لینک
-                    server = re.search(r'server=([^&]+)', link).group(1)
-                    port = re.search(r'port=([^&]+)', link).group(1)
-                    secret = re.search(r'secret=([^&]+)', link).group(1)
-                    proxies.append({
-                        "server": server,
-                        "port": port,
-                        "secret": secret,
-                        "link": link
-                    })
-                except:
-                    continue
-        except Exception as e:
-            print(f"خطا در {url}: {e}")
+    try:
+        # دریافت محتوای HTML کانال
+        headers = {'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36'}
+        response = requests.get(url, headers=headers, timeout=10)
+        
+        # الگوی پیدا کردن لینک‌های پروکسی
+        # دنبال لینک‌هایی می‌گردیم که server= و port= و secret= داشته باشند
+        pattern = r'https://t\.me/proxy\?server=[\w\.\-]+&port=\d+&secret=[\w\.\-%]+'
+        links = re.findall(pattern, response.text)
+        
+        return list(set(links)) # حذف تکراری‌ها در هر کانال
+    except Exception as e:
+        print(f"خطا در {channel_name}: {e}")
+        return []
 
-    # حذف تکراری‌ها
-    final_data = {v['server']:v for v in proxies}.values()
-    final_list = list(final_data)[:50] # گرفتن ۵۰ تای اول برای سرعت
+def main():
+    all_proxies = []
+    
+    for channel in CHANNELS:
+        links = scrape_channel(channel)
+        print(f"یافت شد: {len(links)} عدد")
+        
+        for link in links:
+            try:
+                # استخراج دقیق پارامترها برای فایل جیسون
+                server = re.search(r'server=([\w\.\-]+)', link).group(1)
+                port = re.search(r'port=(\d+)', link).group(1)
+                secret = re.search(r'secret=([\w\.\-%]+)', link).group(1)
+                
+                all_proxies.append({
+                    "server": server,
+                    "port": port,
+                    "secret": secret,
+                    "link": link
+                })
+            except:
+                continue
 
+    # حذف تکراری‌های کلی بر اساس سرور
+    unique_proxies = {p['server']: p for p in all_proxies}.values()
+    final_list = list(unique_proxies)
+
+    # ذخیره در فایل
     with open("proxies.json", "w", encoding="utf-8") as f:
         json.dump(final_list, f, indent=4)
-    
-    print(f"مجموعاً {len(final_list)} پروکسی ذخیره شد.")
+        
+    print(f"\n✅ تمام شد! مجموعاً {len(final_list)} پروکسی منحصر‌به‌فرد ذخیره شد.")
 
 if __name__ == "__main__":
     main()
