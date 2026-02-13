@@ -25,37 +25,44 @@
         <div class="header">
             <h2><span class="live-dot"></span> مانیتورینگ زنده</h2>
             <div id="status">در حال دریافت...</div>
-            <div class="timer-box">بروزرسانی بعدی در: <span id="countdown">05:00</span></div>
+            <div class="timer-box">بروزرسانی بعدی در: <span id="countdown">10:00</span></div>
         </div>
         <div id="proxy-list"></div>
     </div>
 
     <script>
-        let timeLeft = 300; // ۵ دقیقه به ثانیه
+        let timeLeft = 600; // تنظیم روی ۱۰ دقیقه (۶۰۰ ثانیه) هماهنگ با گیت‌هاب
 
         async function loadProxies() {
             try {
                 const res = await fetch('proxies.json?t=' + Date.now());
                 const data = await res.json();
-                const container = document.getElementById('proxy-list');
-                container.innerHTML = '';
-
+                
+                let newHTML = ''; // اول کل HTML رو می‌سازیم تا صفحه پرش نداشته باشه
+                
                 data.forEach(p => {
-                    const pingClass = p.ping < 600 ? 'fast' : 'slow';
-                    container.innerHTML += `
+                    // جلوگیری از مشکل undefined شدن پینگ
+                    const pingValue = p.ping !== undefined ? p.ping : '؟';
+                    const pingClass = (p.ping !== undefined && p.ping < 600) ? 'fast' : 'slow';
+                    
+                    newHTML += `
                         <div class="card">
                             <div class="info">
-                                <strong>${p.server}</strong><br>
-                                <span class="ping ${pingClass}">پینگ: ${p.ping}ms</span>
-                                <small style="display:block; color:#999">تست: ${p.time}</small>
+                                <strong>${p.server || 'نامشخص'}</strong><br>
+                                <span class="ping ${pingClass}">پینگ: ${pingValue}ms</span>
+                                <small style="display:block; color:#999">آخرین تست: ${p.time || '-'}</small>
                             </div>
-                            <a href="${p.link}" class="btn">اتصال</a>
+                            <a href="${p.link}" class="btn" target="_blank">اتصال</a>
                         </div>
                     `;
                 });
+                
+                // جایگذاری یکباره برای جلوگیری از خراب شدن کلیک کاربر
+                document.getElementById('proxy-list').innerHTML = newHTML;
                 document.getElementById('status').innerText = `تعداد پروکسی‌های فعال: ${data.length}`;
             } catch (e) {
-                document.getElementById('status').innerText = "در حال انتظار برای فایل جدید...";
+                console.error("Error fetching proxies:", e);
+                document.getElementById('status').innerText = "خطا در دریافت لیست جدید. در حال استفاده از دیتای قبلی...";
             }
         }
 
@@ -64,10 +71,10 @@
                 let minutes = Math.floor(timeLeft / 60);
                 let seconds = timeLeft % 60;
                 seconds = seconds < 10 ? '0' + seconds : seconds;
-                document.getElementById('countdown').innerText = `0${minutes}:${seconds}`;
+                document.getElementById('countdown').innerText = `${minutes < 10 ? '0'+minutes : minutes}:${seconds}`;
                 
                 if (timeLeft <= 0) {
-                    timeLeft = 300; // ریست تایمر
+                    timeLeft = 600; // ریست تایمر (۱۰ دقیقه)
                     loadProxies(); // دریافت اطلاعات جدید
                 } else {
                     timeLeft--;
@@ -75,7 +82,6 @@
             }, 1000);
         }
 
-        // شروع کار
         loadProxies();
         startTimer();
     </script>
