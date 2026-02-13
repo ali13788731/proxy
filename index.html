@@ -3,43 +3,81 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>پروکسی‌های تلگرامی من</title>
+    <title>مانیتورینگ زنده پروکسی</title>
     <style>
-        body { font-family: system-ui, sans-serif; background: #f4f4f4; text-align: center; padding: 20px; }
-        .card { background: white; margin: 10px auto; padding: 15px; border-radius: 10px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); max-width: 400px; }
-        .btn { display: block; background: #0088cc; color: white; text-decoration: none; padding: 10px; border-radius: 5px; margin-top: 10px; }
-        .ip { font-weight: bold; color: #333; }
-        .ping { font-size: 12px; color: green; }
+        body { font-family: system-ui, -apple-system, sans-serif; background: #f4f7f9; color: #333; margin: 0; padding: 20px; text-align: center; }
+        .container { max-width: 500px; margin: 0 auto; }
+        .header { background: #fff; padding: 20px; border-radius: 15px; box-shadow: 0 4px 15px rgba(0,0,0,0.05); margin-bottom: 20px; }
+        .timer-box { font-size: 18px; color: #ff5722; font-weight: bold; margin-top: 10px; }
+        .live-dot { height: 10px; width: 10px; background-color: #4caf50; border-radius: 50%; display: inline-block; animation: blink 1s infinite; margin-left: 5px; }
+        @keyframes blink { 0% { opacity: 1; } 50% { opacity: 0.3; } 100% { opacity: 1; } }
+        .card { background: #fff; border-radius: 12px; padding: 15px; margin-bottom: 12px; display: flex; justify-content: space-between; align-items: center; box-shadow: 0 2px 8px rgba(0,0,0,0.04); transition: 0.2s; }
+        .card:hover { transform: scale(1.02); }
+        .info { text-align: right; }
+        .ping { display: inline-block; padding: 3px 8px; border-radius: 6px; font-size: 12px; font-weight: bold; margin-top: 5px; }
+        .fast { background: #e8f5e9; color: #2e7d32; }
+        .slow { background: #fff3e0; color: #ef6c00; }
+        .btn { background: #0088cc; color: #fff; text-decoration: none; padding: 10px 18px; border-radius: 10px; font-weight: bold; }
     </style>
 </head>
 <body>
-    <h2>🚀 لیست پروکسی‌های کانال‌ها</h2>
-    <div id="status">در حال دریافت...</div>
-    <div id="list"></div>
+    <div class="container">
+        <div class="header">
+            <h2><span class="live-dot"></span> مانیتورینگ زنده</h2>
+            <div id="status">در حال دریافت...</div>
+            <div class="timer-box">بروزرسانی بعدی در: <span id="countdown">05:00</span></div>
+        </div>
+        <div id="proxy-list"></div>
+    </div>
 
     <script>
-        async function load() {
+        let timeLeft = 300; // ۵ دقیقه به ثانیه
+
+        async function loadProxies() {
             try {
-                let req = await fetch('proxies.json?t=' + Date.now()); // جلوگیری از کش شدن
-                let proxies = await req.json();
-                document.getElementById('status').innerText = `تعداد ${proxies.length} پروکسی پیدا شد.`;
-                
-                let container = document.getElementById('list');
-                proxies.forEach(p => {
-                    let div = document.createElement('div');
-                    div.className = 'card';
-                    div.innerHTML = `
-                        <div class="ip">${p.server}</div>
-                        <div>Port: ${p.port}</div>
-                        <a href="${p.link}" class="btn">اتصال به تلگرام</a>
+                const res = await fetch('proxies.json?t=' + Date.now());
+                const data = await res.json();
+                const container = document.getElementById('proxy-list');
+                container.innerHTML = '';
+
+                data.forEach(p => {
+                    const pingClass = p.ping < 600 ? 'fast' : 'slow';
+                    container.innerHTML += `
+                        <div class="card">
+                            <div class="info">
+                                <strong>${p.server}</strong><br>
+                                <span class="ping ${pingClass}">پینگ: ${p.ping}ms</span>
+                                <small style="display:block; color:#999">تست: ${p.time}</small>
+                            </div>
+                            <a href="${p.link}" class="btn">اتصال</a>
+                        </div>
                     `;
-                    container.appendChild(div);
                 });
-            } catch(e) {
-                document.getElementById('status').innerText = "هنوز لیستی ساخته نشده است.";
+                document.getElementById('status').innerText = `تعداد پروکسی‌های فعال: ${data.length}`;
+            } catch (e) {
+                document.getElementById('status').innerText = "در حال انتظار برای فایل جدید...";
             }
         }
-        load();
+
+        function startTimer() {
+            setInterval(() => {
+                let minutes = Math.floor(timeLeft / 60);
+                let seconds = timeLeft % 60;
+                seconds = seconds < 10 ? '0' + seconds : seconds;
+                document.getElementById('countdown').innerText = `0${minutes}:${seconds}`;
+                
+                if (timeLeft <= 0) {
+                    timeLeft = 300; // ریست تایمر
+                    loadProxies(); // دریافت اطلاعات جدید
+                } else {
+                    timeLeft--;
+                }
+            }, 1000);
+        }
+
+        // شروع کار
+        loadProxies();
+        startTimer();
     </script>
 </body>
 </html>
