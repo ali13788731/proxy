@@ -1,12 +1,12 @@
-name: Channel Scraper
+name: Proxy Auto Update
 
 on:
   schedule:
-    - cron: '0 */1 * * *' # هر یک ساعت
-  workflow_dispatch: # دکمه اجرای دستی
+    - cron: '*/15 * * * *' # هر ۱۵ دقیقه یکبار اجرا می‌شود
+  workflow_dispatch:
 
 permissions:
-  contents: write # این خط اجازه نوشتن فایل را می‌دهد
+  contents: write
 
 jobs:
   build:
@@ -19,7 +19,7 @@ jobs:
         with:
           python-version: '3.9'
           
-      - name: Install Requests
+      - name: Install Dependencies
         run: pip install requests
         
       - name: Run Scraper
@@ -30,6 +30,6 @@ jobs:
           git config --global user.name "GitHub Action"
           git config --global user.email "action@github.com"
           git add proxies.json
-          git commit -m "Updated proxies from channels" || exit 0
+          git commit -m "Auto-update proxies" || exit 0
           git pull --rebase origin main
           git push origin main
