@@ -3,90 +3,43 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>پروکسی‌یاب هوشمند</title>
+    <title>پروکسی‌های تلگرامی من</title>
     <style>
-        :root { --primary: #0088cc; --success: #2ecc71; --bg: #f5f7fa; }
-        body { font-family: system-ui, -apple-system, sans-serif; background: var(--bg); margin: 0; padding: 20px; color: #333; }
-        .container { max-width: 500px; margin: 0 auto; }
-        h2 { text-align: center; color: var(--primary); }
-        .stats { background: white; padding: 10px; border-radius: 10px; margin-bottom: 20px; font-size: 14px; box-shadow: 0 2px 4px rgba(0,0,0,0.05); }
-        .proxy-card { 
-            background: white; border-radius: 12px; padding: 15px; margin-bottom: 12px;
-            display: flex; justify-content: space-between; align-items: center;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.06); border-right: 5px solid #ddd;
-        }
-        .proxy-card.online { border-right-color: var(--success); }
-        .info { text-align: right; }
-        .ip { font-weight: bold; font-family: monospace; display: block; }
-        .port { font-size: 12px; color: #777; }
-        .btn { 
-            background: var(--primary); color: white; text-decoration: none; 
-            padding: 8px 16px; border-radius: 8px; font-size: 14px; font-weight: bold;
-        }
-        .status-badge { font-size: 10px; padding: 2px 6px; border-radius: 4px; background: #eee; margin-top: 4px; display: inline-block; }
+        body { font-family: system-ui, sans-serif; background: #f4f4f4; text-align: center; padding: 20px; }
+        .card { background: white; margin: 10px auto; padding: 15px; border-radius: 10px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); max-width: 400px; }
+        .btn { display: block; background: #0088cc; color: white; text-decoration: none; padding: 10px; border-radius: 5px; margin-top: 10px; }
+        .ip { font-weight: bold; color: #333; }
+        .ping { font-size: 12px; color: green; }
     </style>
 </head>
 <body>
+    <h2>🚀 لیست پروکسی‌های کانال‌ها</h2>
+    <div id="status">در حال دریافت...</div>
+    <div id="list"></div>
 
-<div class="container">
-    <h2>⚡ پروکسی‌های تازه (MTProto)</h2>
-    <div class="stats" id="status">در حال دریافت لیست...</div>
-    <div id="proxy-list"></div>
-</div>
-
-<script>
-    async function testProxy(ip, port) {
-        const controller = new AbortController();
-        const timeout = setTimeout(() => controller.abort(), 2500);
-        try {
-            // ترفند No-Cors برای بررسی باز بودن پورت
-            await fetch(`https://${ip}:${port}`, { mode: 'no-cors', signal: controller.signal });
-            return true;
-        } catch (e) {
-            return e.name !== 'AbortError'; 
-        }
-    }
-
-    async function init() {
-        const listContainer = document.getElementById('proxy-list');
-        const statusText = document.getElementById('status');
-        
-        try {
-            const resp = await fetch('proxies.json');
-            const proxies = await resp.json();
-            statusText.innerText = `تعداد ${proxies.length} پروکسی یافت شد. در حال تست روی اینترنت شما...`;
-
-            for (let p of proxies) {
-                const card = document.createElement('div');
-                card.className = 'proxy-card';
-                card.innerHTML = `
-                    <div class="info">
-                        <span class="ip">${p.server}</span>
-                        <span class="port">Port: ${p.port}</span><br>
-                        <span class="status-badge">در حال تست...</span>
-                    </div>
-                    <a href="${p.link}" class="btn">اتصال به تلگرام</a>
-                `;
-                listContainer.appendChild(card);
-
-                // تست زنده
-                testProxy(p.server, p.port).then(isAlive => {
-                    if (isAlive) {
-                        card.classList.add('online');
-                        card.querySelector('.status-badge').innerText = '✅ احتمالاً متصل';
-                        card.querySelector('.status-badge').style.background = '#e8f6ef';
-                    } else {
-                        card.querySelector('.status-badge').innerText = '⏳ نامشخص/ضعیف';
-                    }
+    <script>
+        async function load() {
+            try {
+                let req = await fetch('proxies.json?t=' + Date.now()); // جلوگیری از کش شدن
+                let proxies = await req.json();
+                document.getElementById('status').innerText = `تعداد ${proxies.length} پروکسی پیدا شد.`;
+                
+                let container = document.getElementById('list');
+                proxies.forEach(p => {
+                    let div = document.createElement('div');
+                    div.className = 'card';
+                    div.innerHTML = `
+                        <div class="ip">${p.server}</div>
+                        <div>Port: ${p.port}</div>
+                        <a href="${p.link}" class="btn">اتصال به تلگرام</a>
+                    `;
+                    container.appendChild(div);
                 });
+            } catch(e) {
+                document.getElementById('status').innerText = "هنوز لیستی ساخته نشده است.";
             }
-            statusText.innerText = "تست اولیه تمام شد. پروکسی‌های سبز شانس بیشتری دارند.";
-        } catch (e) {
-            statusText.innerText = "خطا در بارگذاری. مطمئن شوید Action با موفقیت اجرا شده است.";
         }
-    }
-
-    init();
-</script>
+        load();
+    </script>
 </body>
 </html>
