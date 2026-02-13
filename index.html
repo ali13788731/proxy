@@ -5,95 +5,88 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>پروکسی‌یاب هوشمند</title>
     <style>
-        body { font-family: sans-serif; background: #f0f2f5; text-align: center; padding: 20px; }
-        h2 { color: #333; }
-        .status { margin-bottom: 20px; font-weight: bold; color: #555; }
-        .card { 
-            background: white; margin: 10px auto; padding: 15px; 
-            border-radius: 12px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); 
-            max-width: 400px; display: flex; justify-content: space-between; align-items: center;
+        :root { --primary: #0088cc; --success: #2ecc71; --bg: #f5f7fa; }
+        body { font-family: system-ui, -apple-system, sans-serif; background: var(--bg); margin: 0; padding: 20px; color: #333; }
+        .container { max-width: 500px; margin: 0 auto; }
+        h2 { text-align: center; color: var(--primary); }
+        .stats { background: white; padding: 10px; border-radius: 10px; margin-bottom: 20px; font-size: 14px; box-shadow: 0 2px 4px rgba(0,0,0,0.05); }
+        .proxy-card { 
+            background: white; border-radius: 12px; padding: 15px; margin-bottom: 12px;
+            display: flex; justify-content: space-between; align-items: center;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.06); border-right: 5px solid #ddd;
         }
+        .proxy-card.online { border-right-color: var(--success); }
         .info { text-align: right; }
-        .ip { font-size: 14px; font-weight: bold; }
+        .ip { font-weight: bold; font-family: monospace; display: block; }
+        .port { font-size: 12px; color: #777; }
         .btn { 
-            text-decoration: none; padding: 8px 15px; border-radius: 8px; 
-            color: white; font-weight: bold; font-size: 14px;
+            background: var(--primary); color: white; text-decoration: none; 
+            padding: 8px 16px; border-radius: 8px; font-size: 14px; font-weight: bold;
         }
-        .checking { border-right: 5px solid orange; }
-        .online { border-right: 5px solid #2ecc71; }
-        .offline { display: none; } /* مخفی کردن خراب‌ها */
-        .btn-connect { background: #0088cc; }
+        .status-badge { font-size: 10px; padding: 2px 6px; border-radius: 4px; background: #eee; margin-top: 4px; display: inline-block; }
     </style>
 </head>
 <body>
 
-    <h2>⚡ پروکسی‌های فعال برای شما</h2>
-    <div class="status" id="status-text">در حال دریافت لیست و تست سرعت...</div>
-    <div id="list"></div>
+<div class="container">
+    <h2>⚡ پروکسی‌های تازه (MTProto)</h2>
+    <div class="stats" id="status">در حال دریافت لیست...</div>
+    <div id="proxy-list"></div>
+</div>
 
-    <script>
-        const PROXY_JSON_URL = 'proxies.json'; 
-
-        async function checkConnection(ip, port) {
-            const controller = new AbortController();
-            const timeoutId = setTimeout(() => controller.abort(), 2000); // 2 ثانیه زمان برای تست
-            
-            try {
-                // تلاش برای اتصال به پورت (تکنیک Fetch No-Cors)
-                await fetch(`http://${ip}:${port}`, { 
-                    mode: 'no-cors', 
-                    signal: controller.signal 
-                });
-                return true; // اگر ارور شبکه ندهد، یعنی پورت باز است
-            } catch (error) {
-                // اگر AbortError باشد یعنی تایم‌اوت شده (فیلتر یا بسته است)
-                return error.name !== 'AbortError';
-            }
+<script>
+    async function testProxy(ip, port) {
+        const controller = new AbortController();
+        const timeout = setTimeout(() => controller.abort(), 2500);
+        try {
+            // ترفند No-Cors برای بررسی باز بودن پورت
+            await fetch(`https://${ip}:${port}`, { mode: 'no-cors', signal: controller.signal });
+            return true;
+        } catch (e) {
+            return e.name !== 'AbortError'; 
         }
+    }
 
-        async function init() {
-            try {
-                const response = await fetch(PROXY_JSON_URL);
-                const proxies = await response.json();
-                const listDiv = document.getElementById('list');
-                
-                document.getElementById('status-text').innerText = `تست ${proxies.length} پروکسی...`;
+    async function init() {
+        const listContainer = document.getElementById('proxy-list');
+        const statusText = document.getElementById('status');
+        
+        try {
+            const resp = await fetch('proxies.json');
+            const proxies = await resp.json();
+            statusText.innerText = `تعداد ${proxies.length} پروکسی یافت شد. در حال تست روی اینترنت شما...`;
 
-                let workingCount = 0;
+            for (let p of proxies) {
+                const card = document.createElement('div');
+                card.className = 'proxy-card';
+                card.innerHTML = `
+                    <div class="info">
+                        <span class="ip">${p.server}</span>
+                        <span class="port">Port: ${p.port}</span><br>
+                        <span class="status-badge">در حال تست...</span>
+                    </div>
+                    <a href="${p.link}" class="btn">اتصال به تلگرام</a>
+                `;
+                listContainer.appendChild(card);
 
-                for (const p of proxies) {
-                    // ساخت کارت (ابتدا مخفی یا در حال تست)
-                    const card = document.createElement('div');
-                    card.className = 'card checking';
-                    card.innerHTML = `
-                        <div class="info">
-                            <div class="ip">${p.server}</div>
-                            <small>Port: ${p.port}</small>
-                        </div>
-                        <a href="${p.link}" class="btn btn-connect">اتصال</a>
-                    `;
-                    listDiv.appendChild(card);
-
-                    // انجام تست واقعی
-                    const isAlive = await checkConnection(p.server, p.port);
-
+                // تست زنده
+                testProxy(p.server, p.port).then(isAlive => {
                     if (isAlive) {
-                        card.className = 'card online'; // سبز می‌شود
-                        workingCount++;
+                        card.classList.add('online');
+                        card.querySelector('.status-badge').innerText = '✅ احتمالاً متصل';
+                        card.querySelector('.status-badge').style.background = '#e8f6ef';
                     } else {
-                        card.className = 'card offline'; // حذف می‌شود
-                        card.remove();
+                        card.querySelector('.status-badge').innerText = '⏳ نامشخص/ضعیف';
                     }
-                }
-                document.getElementById('status-text').innerText = `پایان تست: ${workingCount} پروکسی فعال یافت شد.`;
-
-            } catch (e) {
-                document.getElementById('status-text').innerText = "خطا در دریافت لیست.";
-                console.log(e);
+                });
             }
+            statusText.innerText = "تست اولیه تمام شد. پروکسی‌های سبز شانس بیشتری دارند.";
+        } catch (e) {
+            statusText.innerText = "خطا در بارگذاری. مطمئن شوید Action با موفقیت اجرا شده است.";
         }
+    }
 
-        init();
-    </script>
+    init();
+</script>
 </body>
 </html>
