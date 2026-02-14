@@ -3,103 +3,74 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>مانیتورینگ زنده پروکسی</title>
+    <title>پروکسی‌های فعال تلگرام</title>
     <style>
-        body { font-family: system-ui, -apple-system, sans-serif; background: #f4f7f9; color: #333; margin: 0; padding: 20px; text-align: center; }
-        .container { max-width: 500px; margin: 0 auto; }
-        .header { background: #fff; padding: 20px; border-radius: 15px; box-shadow: 0 4px 15px rgba(0,0,0,0.05); margin-bottom: 20px; }
-        .timer-box { font-size: 18px; color: #ff5722; font-weight: bold; margin-top: 10px; }
-        .live-dot { height: 10px; width: 10px; background-color: #4caf50; border-radius: 50%; display: inline-block; animation: blink 1s infinite; margin-left: 5px; }
-        @keyframes blink { 0% { opacity: 1; } 50% { opacity: 0.3; } 100% { opacity: 1; } }
-        .card { background: #fff; border-radius: 12px; padding: 15px; margin-bottom: 12px; display: flex; justify-content: space-between; align-items: center; box-shadow: 0 2px 8px rgba(0,0,0,0.04); transition: 0.2s; }
-        .card:hover { transform: scale(1.02); }
+        body { font-family: system-ui, -apple-system, sans-serif; background: #f0f2f5; color: #333; margin: 0; padding: 20px; text-align: center; }
+        .container { max-width: 600px; margin: 0 auto; }
+        .header { background: #fff; padding: 20px; border-radius: 16px; box-shadow: 0 4px 20px rgba(0,0,0,0.08); margin-bottom: 25px; }
+        .update-time { font-size: 16px; color: #555; margin-top: 10px; font-weight: bold; }
+        .update-time span { color: #0088cc; }
+        
+        .card { background: #fff; border-radius: 12px; padding: 15px; margin-bottom: 12px; display: flex; justify-content: space-between; align-items: center; box-shadow: 0 2px 8px rgba(0,0,0,0.04); transition: transform 0.2s; border-right: 4px solid #ddd; }
+        .card:hover { transform: translateY(-2px); }
+        .card.fast { border-right-color: #4caf50; } /* سبز برای پینگ عالی */
+        .card.medium { border-right-color: #ff9800; } /* نارنجی برای پینگ متوسط */
+        
         .info { text-align: right; }
-        .ping { display: inline-block; padding: 3px 8px; border-radius: 6px; font-size: 12px; font-weight: bold; margin-top: 5px; }
-        .fast { background: #e8f5e9; color: #2e7d32; }
-        .slow { background: #fff3e0; color: #ef6c00; }
-        .btn { background: #0088cc; color: #fff; text-decoration: none; padding: 10px 18px; border-radius: 10px; font-weight: bold; }
+        .server-name { font-weight: bold; font-size: 14px; color: #333; }
+        .ping-badge { display: inline-block; background: #eee; padding: 2px 8px; border-radius: 6px; font-size: 12px; margin-top: 5px; color: #666; }
+        
+        .btn { background: linear-gradient(45deg, #0088cc, #005f8f); color: #fff; text-decoration: none; padding: 10px 20px; border-radius: 10px; font-weight: bold; box-shadow: 0 4px 10px rgba(0,136,204,0.3); transition: 0.2s; }
+        .btn:active { transform: scale(0.95); }
     </style>
 </head>
 <body>
     <div class="container">
         <div class="header">
-            <h2><span class="live-dot"></span> مانیتورینگ زنده</h2>
-            <div id="status">در حال دریافت...</div>
-            <div class="timer-box">بروزرسانی بعدی در: <span id="countdown">10:00</span></div>
+            <h2>لیست پروکسی‌های تلگرام</h2>
+            <div class="update-time">آخرین بروزرسانی: <span id="last-update">در حال دریافت...</span></div>
         </div>
-        <div id="proxy-list"></div>
+        <div id="proxy-list">
+            <p style="color:#777">در حال بارگذاری اطلاعات...</p>
+        </div>
     </div>
 
 <script>
-    const UPDATE_INTERVAL = 600; // ۱۰ دقیقه به ثانیه
-    let timeLeft;
-
-    // بررسی می‌کنیم آیا قبلا زمانی در حافظه مرورگر ذخیره شده یا نه
-    const storedTargetTime = localStorage.getItem('proxyTargetTime');
-    const now = Math.floor(Date.now() / 1000);
-
-    if (storedTargetTime && storedTargetTime > now) {
-        // اگر زمان ذخیره شده هنوز تمام نشده، تایمر رو از ادامه اون حساب کن
-        timeLeft = storedTargetTime - now;
-    } else {
-        // اگر زمان تمام شده یا دفعه اولی است که سایت باز می‌شود، تایمر جدید بساز
-        timeLeft = UPDATE_INTERVAL;
-        localStorage.setItem('proxyTargetTime', now + UPDATE_INTERVAL);
-    }
-
     async function loadProxies() {
         try {
+            // اضافه کردن عدد تصادفی برای جلوگیری از کش شدن
             const res = await fetch('proxies.json?t=' + Date.now());
             const data = await res.json();
             
+            // نمایش زمان بروزرسانی از فایل جیسون
+            document.getElementById('last-update').innerText = data.last_updated || 'نامشخص';
+            
             let newHTML = ''; 
             
-            data.forEach(p => {
-                const pingValue = p.ping !== undefined ? p.ping : '؟';
-                const pingClass = (p.ping !== undefined && p.ping < 600) ? 'fast' : 'slow';
+            // حلقه روی لیست پروکسی‌ها
+            data.proxies.forEach(p => {
+                // تعیین رنگ حاشیه بر اساس پینگ
+                const speedClass = p.ping < 1000 ? 'fast' : 'medium';
                 
                 newHTML += `
-                    <div class="card">
+                    <div class="card ${speedClass}">
                         <div class="info">
-                            <strong>${p.server || 'نامشخص'}</strong><br>
-                            <span class="ping ${pingClass}">پینگ: ${pingValue}ms</span>
-                            <small style="display:block; color:#999">آخرین تست: ${p.time || '-'}</small>
+                            <div class="server-name">${p.server}</div>
+                            <div class="ping-badge">پینگ: ${p.ping} ms</div>
                         </div>
-                        <a href="${p.link}" class="btn" target="_blank">اتصال</a>
+                        <a href="${p.link}" class="btn">اتصال</a>
                     </div>
                 `;
             });
             
             document.getElementById('proxy-list').innerHTML = newHTML;
-            document.getElementById('status').innerText = `تعداد پروکسی‌های فعال: ${data.length}`;
         } catch (e) {
-            console.error("Error fetching proxies:", e);
-            document.getElementById('status').innerText = "خطا در دریافت لیست جدید. در حال استفاده از دیتای قبلی...";
+            console.error("Error:", e);
+            document.getElementById('proxy-list').innerHTML = '<p style="color:red">خطا در دریافت لیست. لطفا صفحه را رفرش کنید.</p>';
         }
     }
 
-    function startTimer() {
-        setInterval(() => {
-            let minutes = Math.floor(timeLeft / 60);
-            let seconds = timeLeft % 60;
-            seconds = seconds < 10 ? '0' + seconds : seconds;
-            document.getElementById('countdown').innerText = `${minutes < 10 ? '0'+minutes : minutes}:${seconds}`;
-            
-            if (timeLeft <= 0) {
-                // ریست کردن تایمر و حافظه محلی
-                timeLeft = UPDATE_INTERVAL;
-                const newNow = Math.floor(Date.now() / 1000);
-                localStorage.setItem('proxyTargetTime', newNow + UPDATE_INTERVAL);
-                
-                loadProxies(); // دریافت اطلاعات جدید
-            } else {
-                timeLeft--;
-            }
-        }, 1000);
-    }
-
     loadProxies();
-    startTimer();
 </script>
 </body>
 </html>
