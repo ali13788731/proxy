@@ -4,20 +4,18 @@ import json
 import html
 import socket
 import time
-import jdatetime  # برای تاریخ شمسی
+import jdatetime
 from concurrent.futures import ThreadPoolExecutor
+from urllib.parse import urlparse, parse_qs
 
-# لیست کانال‌های پروکسی
 CHANNELS = [
     "Myporoxy", "TelMTProto", "ProxyMTProto", "mt_p_roxy", 
     "ProxyHagh", "MTProtoProxies", "PinkProxy", "v2rayng_vpn"
 ]
 
 def get_ping(server, port):
-    """تست پینگ واقعی (اتصال TCP)"""
     try:
         start = time.time()
-        # کاهش تایم‌اوت به 1.5 ثانیه برای سرعت بیشتر
         sock = socket.create_connection((server, int(port)), timeout=1.5)
         sock.close()
         return int((time.time() - start) * 1000)
@@ -25,64 +23,69 @@ def get_ping(server, port):
         return 9999
 
 def process_proxy(link):
-    """استخراج و تست پینگ هر لینک"""
     try:
-        # تبدیل لینک وب به لینک مستقیم تلگرام
-        if "https://t.me/proxy" in link:
-            link = link.replace("https://t.me/proxy", "tg://proxy")
-            
-        server = re.search(r'server=([\w\.\-\[\]:]+)', link).group(1)
-        port = re.search(r'port=(\d+)', link).group(1)
-        secret = re.search(r'secret=([\w\.\-\%]+)', link).group(1)
+        # استانداردسازی لینک
+        clean_link = link.replace("tg://proxy", "https://t.me/proxy")
+        parsed_url = urlparse(clean_link)
+        params = parse_qs(parsed_url.query)
         
+        server = params.get('server', [None])[0]
+        port = params.get('port', [None])[0]
+        secret = params.get('secret', [None])[0]
+        
+        if not all([server, port, secret]):
+            return None
+            
         ping = get_ping(server, port)
         
-        # فقط پروکسی‌های با پینگ زیر 3000 میلی‌ثانیه
         if ping < 3000: 
             return {
                 "server": server,
                 "port": port,
                 "secret": secret,
-                "link": link,
+                "link": f"tg://proxy?server={server}&port={port}&secret={secret}",
                 "ping": ping
             }
-    except:
+    except Exception as e:
         return None
+    return None
 
 def main():
     print("🚀 در حال دریافت لیست پروکسی‌ها...")
     raw_links = []
+    
+    # استفاده از Session برای سرعت بیشتر و شبیه‌سازی مرورگر
+    session = requests.Session()
+    session.headers.update({'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36'})
+
     for chan in CHANNELS:
         try:
             url = f"https://t.me/s/{chan}"
-            res = requests.get(url, headers={'User-Agent': 'Mozilla/5.0'}, timeout=10)
-            clean_text = html.unescape(res.text)
-            # استخراج لینک‌ها
-            links = re.findall(r'(?:https://t\.me/|tg://)proxy\?(?:[^"\s>]+)', clean_text)
+            res = session.get(url, timeout=15)
+            # رنک‌گیری دقیق‌تر لینک‌ها
+            links = re.findall(r'tg://proxy\?[^"\'\s<>]+|https://t\.me/proxy\?[^"\'\s<>]+', res.text)
             raw_links.extend(links)
             print(f"✅ {chan}: {len(links)} یافت شد.")
-        except:
+        except Exception as e:
+            print(f"❌ خطا در کانال {chan}: {e}")
             continue
 
     unique_links = list(set(raw_links))
     valid_proxies = []
 
-    # پینگ موازی
     print(f"⚡ در حال تست پینگ {len(unique_links)} پروکسی...")
-    with ThreadPoolExecutor(max_workers=50) as executor:
+    with ThreadPoolExecutor(max_workers=30) as executor:
         results = executor.map(process_proxy, unique_links)
         for r in results:
             if r: valid_proxies.append(r)
 
-    # مرتب‌سازی: کمترین پینگ اول لیست
     valid_proxies.sort(key=lambda x: x['ping'])
+    
+    # فقط ۳۰ تای برتر رو نگه دار (برای شلوغ نشدن صفحه)
+    valid_proxies = valid_proxies[:30]
 
-    # دریافت زمان فعلی به وقت ایران (شمسی)
-    # با فرض اینکه سرور گیت‌هاب UTC است، ۳:۳۰ ساعت اضافه می‌کنیم یا از کتابخانه برای تایم‌زون استفاده می‌کنیم
-    # اینجا مستقیماً زمان را تبدیل می‌کنیم
     now_shamsi = jdatetime.datetime.now().strftime("%Y/%m/%d - %H:%M")
-
-    # ساختار نهایی جیسون
+    
     final_output = {
         "last_updated": now_shamsi,
         "proxies": valid_proxies
@@ -91,7 +94,7 @@ def main():
     with open("proxies.json", "w", encoding="utf-8") as f:
         json.dump(final_output, f, indent=4, ensure_ascii=False)
     
-    print(f"🏁 تمام شد. {len(valid_proxies)} پروکسی فعال ذخیره شد. زمان: {now_shamsi}")
+    print(f"🏁 تمام شد. {len(valid_proxies)} پروکسی ذخیره شد.")
 
 if __name__ == "__main__":
     main()
