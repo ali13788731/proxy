@@ -1,39 +1,47 @@
 name: Proxy Auto Update
 
+# زمان‌بندی اجرا
 on:
   schedule:
-    - cron: '*/15 * * * *'
-  workflow_dispatch: # برای اجرای دستی از داخل گیت‌هاب
-  repository_dispatch: # برای اجرای از طریق API (cron-job.org)
-    types: [trigger_update]
+    - cron: '*/30 * * * *'  # اجرا هر 30 دقیقه یکبار
+  workflow_dispatch:        # قابلیت اجرای دستی دکمه‌ای
 
-
+# مجوز دسترسی برای ذخیره فایل‌ها
 permissions:
   contents: write
 
 jobs:
   build:
     runs-on: ubuntu-latest
+
     steps:
-      - uses: actions/checkout@v3
-      
-      - name: Setup Python
+      # 1. دریافت کدهای مخزن
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      # 2. نصب پایتون
+      - name: Set up Python
         uses: actions/setup-python@v4
         with:
           python-version: '3.9'
-          
-      - name: Install Dependencies
+
+      # 3. نصب کتابخانه‌های مورد نیاز
+      - name: Install dependencies
         run: |
           pip install requests jdatetime
-          
-      - name: Run Scraper
-        run: python scraper.py
-        
-      - name: Commit and Push
+
+      # 4. اجرای اسکریپت پایتون (نام فایل را چک کنید)
+      - name: Run Proxy Scraper
+        run: python main.py
+
+      # 5. تنظیمات گیت و ذخیره تغییرات
+      - name: Commit and Push changes
         run: |
           git config --global user.name "GitHub Action"
           git config --global user.email "action@github.com"
-          git add proxies.json
-          # اگر تغییری نبود ارور نده
-          git commit -m "Auto-update proxies with correct time" || exit 0
-          git push
+          
+          # اضافه کردن فایل‌های تولید شده
+          git add proxies.json sub.txt proxies.txt
+          
+          # بررسی تغییرات و کامیت (اگر تغییری نباشد ارور نمی‌دهد)
+          git diff --quiet && git diff --staged --quiet || (git commit -m "Auto-update proxies [skip ci]" && git push)
