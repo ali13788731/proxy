@@ -2,8 +2,8 @@ name: Proxy Auto Update
 
 on:
   schedule:
-    - cron: '*/10 * * * *' # تغییر به هر ۱۰ دقیقه یکبار
-  workflow_dispatch:
+    - cron: '*/10 * * * *' # اجرا هر ۱۰ دقیقه یکبار
+  workflow_dispatch: # قابلیت اجرای دستی
 
 permissions:
   contents: write
@@ -20,17 +20,16 @@ jobs:
           python-version: '3.9'
           
       - name: Install Dependencies
-        run: pip install requests
-        
+        run: |
+          pip install requests jdatetime
+          
       - name: Run Scraper
-        run: python scraper.py # مطمئن شو اسم فایل پایتونت دقیقا scraper.py باشه
+        run: python scraper.py
         
       - name: Commit and Push
         run: |
           git config --global user.name "GitHub Action"
           git config --global user.email "action@github.com"
           git add proxies.json
-          # اگر تغییری نکرده باشه ارور نمیده و میره مرحله بعد
-          git commit -m "Auto-update proxies" || exit 0
-          git pull --rebase origin main
-          git push origin main
+          git commit -m "Update proxies list [skip ci]" || exit 0
+          git push
