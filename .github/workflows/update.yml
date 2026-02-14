@@ -1,9 +1,16 @@
 name: Proxy Auto Update
 
 on:
+  # ۱. اجرای خودکار توسط خود گیت‌هاب (هر ۱۰ دقیقه)
   schedule:
-    - cron: '*/10 * * * *' # اجرا هر ۱۰ دقیقه یکبار
-  workflow_dispatch: # قابلیت اجرای دستی
+    - cron: '*/10 * * * *'
+  
+  # ۲. اجرای توسط فراخوان خارجی مثل cron-job.com (به عنوان زاپاس)
+  repository_dispatch:
+    types: [trigger_update]
+  
+  # ۳. قابلیت اجرای دستی توسط خودت
+  workflow_dispatch:
 
 permissions:
   contents: write
@@ -31,5 +38,6 @@ jobs:
           git config --global user.name "GitHub Action"
           git config --global user.email "action@github.com"
           git add proxies.json
-          git commit -m "Update proxies list [skip ci]" || exit 0
+          # اگر تغییری نبود متوقف بشه و ارور نده
+          git commit -m "Auto-update proxies" || exit 0
           git push
