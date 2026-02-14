@@ -1,153 +1,122 @@
-import requests
-import re
-import json
-import html
-import socket
-import time
-import jdatetime
-from datetime import datetime, timedelta
-from concurrent.futures import ThreadPoolExecutor
-
-# لیست کانال‌های پروکسی
-CHANNELS = [
-    "Myporoxy", "TelMTProto", "ProxyMTProto", "mt_p_roxy", 
-    "ProxyHagh", "MTProtoProxies", "PinkProxy", "v2rayng_vpn"
-]
-
-# تنظیمات زمان‌بندی
-CHECK_INTERVAL = 30  # هر چند ثانیه اینترنت را چک کند (در زمان قطعی)
-RUN_INTERVAL = 600   # هر چند ثانیه (۱۰ دقیقه) اسکریپت اجرا شود (در زمان وصلی)
-
-def check_internet():
-    """بررسی اتصال به اینترنت با پینگ کردن DNS گوگل"""
-    try:
-        # اتصال به 8.8.8.8 پورت 53 (DNS) با تایم‌اوت 3 ثانیه
-        socket.create_connection(("8.8.8.8", 53), timeout=3)
-        return True
-    except OSError:
-        return False
-
-def get_ping(server, port):
-    """تست پینگ واقعی (اتصال TCP)"""
-    try:
-        start = time.time()
-        sock = socket.create_connection((server, int(port)), timeout=1.5)
-        sock.close()
-        return int((time.time() - start) * 1000)
-    except:
-        return 9999
-
-def process_proxy(link):
-    """استخراج و تست پینگ هر لینک"""
-    try:
-        if "https://t.me/proxy" in link:
-            link = link.replace("https://t.me/proxy", "tg://proxy")
-            
-        server_match = re.search(r'server=([\w\.\-\[\]:]+)', link)
-        port_match = re.search(r'port=(\d+)', link)
-        secret_match = re.search(r'secret=([\w\.\-\%]+)', link)
-
-        if not (server_match and port_match and secret_match):
-            return None
-
-        server = server_match.group(1)
-        port = port_match.group(1)
-        secret = secret_match.group(1)
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>پروکسی‌های هوشمند</title>
+    <style>
+        body { font-family: system-ui, -apple-system, sans-serif; background: #f0f2f5; color: #333; margin: 0; padding: 20px; text-align: center; }
+        .container { max-width: 600px; margin: 0 auto; }
         
-        ping = get_ping(server, port)
+        /* هدر وضعیت کاربر */
+        .user-status { background: #fff; padding: 15px; border-radius: 12px; margin-bottom: 20px; border: 1px solid #e0e0e0; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap;}
+        .isp-badge { font-weight: bold; padding: 5px 10px; border-radius: 8px; background: #e3f2fd; color: #0d47a1; font-size: 0.9em; }
+        .mci { background: #e8f5e9; color: #2e7d32; } /* سبز برای همراه اول */
+        .irancell { background: #fff3e0; color: #ef6c00; } /* زرد برای ایرانسل */
         
-        if ping < 3000: 
-            return {
-                "server": server,
-                "port": port,
-                "secret": secret,
-                "link": link,
-                "ping": ping
+        .card { background: #fff; border-radius: 12px; padding: 15px; margin-bottom: 12px; display: flex; justify-content: space-between; align-items: center; box-shadow: 0 2px 8px rgba(0,0,0,0.04); transition: transform 0.2s; border-right: 4px solid #ddd; }
+        .card:hover { transform: translateY(-2px); }
+        .card.fast { border-right-color: #4caf50; } 
+        .card.medium { border-right-color: #ff9800; } 
+        
+        .info { text-align: right; }
+        .server-name { font-weight: bold; font-size: 14px; color: #333; margin-bottom: 4px; }
+        .ping-badge { font-size: 12px; color: #666; background: #f5f5f5; padding: 2px 6px; border-radius: 4px;}
+        
+        .btn { background: linear-gradient(45deg, #0088cc, #005f8f); color: #fff; text-decoration: none; padding: 10px 20px; border-radius: 10px; font-weight: bold; box-shadow: 0 4px 10px rgba(0,136,204,0.3); transition: 0.2s; white-space: nowrap; }
+        .btn:active { transform: scale(0.95); }
+    </style>
+</head>
+<body>
+    <div class="container">
+        
+        <div class="user-status">
+            <span>اینترنت شما:</span>
+            <span id="isp-name" class="isp-badge">در حال تشخیص...</span>
+        </div>
+
+        <div class="header">
+            <h3>لیست پروکسی‌های تلگرام</h3>
+            <div style="font-size:12px; color:#777">بروزرسانی: <span id="last-update">...</span></div>
+        </div>
+
+        <div id="proxy-list">
+            <p style="color:#777">⏳ در حال دریافت لیست...</p>
+        </div>
+    </div>
+
+<script>
+    // تابع تشخیص ISP با استفاده از API رایگان
+    async function detectISP() {
+        const ispElement = document.getElementById('isp-name');
+        try {
+            // سرویس ip-api (نسخه غیر HTTPS محدودیت دارد، برای HTTPS از ipapi.co استفاده کنید اگر هاست شما SSL دارد)
+            const response = await fetch('https://ipapi.co/json/');
+            const data = await response.json();
+            const org = (data.org || data.isp || "").toLowerCase();
+
+            let displayName = data.org || "نامشخص";
+            let className = "isp-badge";
+
+            // تشخیص ساده اپراتورهای ایران
+            if (org.includes('mci') || org.includes('mobile communication')) {
+                displayName = "همراه اول (MCI)";
+                className += " mci";
+            } else if (org.includes('irancell') || org.includes('mtn')) {
+                displayName = "ایرانسل (Irancell)";
+                className += " irancell";
+            } else if (org.includes('telecom') || org.includes('tci')) {
+                displayName = "مخابرات";
+            } else if (org.includes('shatel')) {
+                displayName = "شاتل";
             }
-    except Exception as e:
-        return None
-    return None
 
-def run_scraper():
-    """بدنه اصلی برنامه که اجرا می‌شود"""
-    print(f"\n🚀 شروع عملیات در ساعت: {datetime.now().strftime('%H:%M:%S')}")
-    print("📥 در حال دریافت لیست پروکسی‌ها...")
-    
-    raw_links = []
-    for chan in CHANNELS:
-        try:
-            url = f"https://t.me/s/{chan}"
-            # تایم‌اوت را کمی بیشتر کردیم تا در اینترنت ضعیف هم کار کند
-            res = requests.get(url, headers={'User-Agent': 'Mozilla/5.0'}, timeout=15)
-            clean_text = html.unescape(res.text)
-            links = re.findall(r'(?:https://t\.me/|tg://)proxy\?(?:[^"\s>]+)', clean_text)
-            raw_links.extend(links)
-            print(f"✅ {chan}: {len(links)} یافت شد.")
-        except requests.exceptions.RequestException as e:
-            print(f"❌ خطا در دریافت {chan}: {e}")
-            continue
-        except Exception as e:
-            print(f"⚠️ خطای ناشناس در {chan}")
-            continue
-
-    unique_links = list(set(raw_links))
-    valid_proxies = []
-
-    if not unique_links:
-        print("⚠️ هیچ لینکی یافت نشد. اینترنت چک شود.")
-        return
-
-    print(f"⚡ در حال تست پینگ {len(unique_links)} پروکسی...")
-    
-    # استفاده از ThreadPoolExecutor برای سرعت بالا
-    with ThreadPoolExecutor(max_workers=50) as executor:
-        results = executor.map(process_proxy, unique_links)
-        for r in results:
-            if r: valid_proxies.append(r)
-
-    valid_proxies.sort(key=lambda x: x['ping'])
-
-    # --- تنظیم زمان ---
-    utc_now = datetime.utcnow()
-    tehran_time = utc_now + timedelta(hours=3, minutes=30)
-    now_shamsi = jdatetime.datetime.fromgregorian(datetime=tehran_time).strftime("%Y/%m/%d - %H:%M")
-    
-    final_output = {
-        "last_updated": now_shamsi,
-        "proxies": valid_proxies
+            ispElement.innerText = displayName;
+            ispElement.className = className;
+            
+            return displayName; // برگرداندن نام برای استفاده‌های بعدی
+        } catch (error) {
+            console.error("خطا در تشخیص ISP:", error);
+            ispElement.innerText = "ناشناس (Vpn روشن است؟)";
+        }
     }
 
-    try:
-        with open("proxies.json", "w", encoding="utf-8") as f:
-            json.dump(final_output, f, indent=4, ensure_ascii=False)
-        print(f"💾 فایل ذخیره شد. تعداد پروکسی: {len(valid_proxies)}")
-    except Exception as e:
-        print(f"❌ خطا در ذخیره فایل: {e}")
+    async function loadProxies() {
+        try {
+            // اجرای تشخیص اپراتور
+            detectISP();
 
-    print(f"🏁 پایان عملیات. زمان: {now_shamsi}")
+            const res = await fetch('proxies.json?t=' + Date.now());
+            const data = await res.json();
+            
+            document.getElementById('last-update').innerText = data.last_updated || 'نامشخص';
+            
+            let newHTML = ''; 
+            
+            data.proxies.forEach(p => {
+                const speedClass = p.ping < 1000 ? 'fast' : 'medium';
+                // کوتاه کردن نام سرور برای زیبایی
+                const shortServer = p.server.length > 20 ? p.server.substring(0, 18) + '...' : p.server;
 
-if __name__ == "__main__":
-    print("✅ اسکریپت ضد قطعی اینترنت فعال شد.")
-    print("--------------------------------------")
-    
-    while True:
-        try:
-            if check_internet():
-                # اگر اینترنت وصل بود، برنامه اجرا شود
-                run_scraper()
-                
-                print(f"💤 استراحت برای {RUN_INTERVAL} ثانیه...")
-                time.sleep(RUN_INTERVAL)
-            else:
-                # اگر اینترنت قطع بود
-                print(f"⛔ اینترنت قطع است! تلاش مجدد در {CHECK_INTERVAL} ثانیه دیگر...")
-                time.sleep(CHECK_INTERVAL)
-                
-        except KeyboardInterrupt:
-            print("\n🛑 برنامه توسط کاربر متوقف شد.")
-            break
-        except Exception as e:
-            # اگر خطای خیلی بدی رخ داد که کل برنامه خواست کرش کند
-            print(f"🔥 خطای بحرانی (Critical Error): {e}")
-            print("🔄 راه‌اندازی مجدد خودکار...")
-            time.sleep(10)
+                newHTML += `
+                    <div class="card ${speedClass}">
+                        <div class="info">
+                            <div class="server-name">${shortServer}</div>
+                            <div class="ping-badge">پینگ سرور: ${p.ping} ms</div>
+                        </div>
+                        <a href="${p.link}" class="btn">اتصال</a>
+                    </div>
+                `;
+            });
+            
+            document.getElementById('proxy-list').innerHTML = newHTML;
+        } catch (e) {
+            console.error("Error:", e);
+            document.getElementById('proxy-list').innerHTML = '<p style="color:red">خطا در بارگذاری.</p>';
+        }
+    }
+
+    loadProxies();
+</script>
+</body>
+</html>
