@@ -1,123 +1,67 @@
 {
-    "last_updated": "1404/11/25 - 09:00",
+    "last_updated": "1404/11/25 - 09:10",
     "proxies": [
-        {
-            "server": "wine.limoozin.info",
-            "port": "25565",
-            "secret": "eeNEgYdJvXrFGRMCIMJdCQtY2RueWVrdGFuZXQuY29tZmFyYWthdi5jb212YW4ubmFqdmEuY29tAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-            "link": "tg://proxy?server=wine.limoozin.info&amp;port=25565&amp;secret=eeNEgYdJvXrFGRMCIMJdCQtY2RueWVrdGFuZXQuY29tZmFyYWthdi5jb212YW4ubmFqdmEuY29tAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-            "ping": 19
-        },
-        {
-            "server": "champagne.limoozin.info",
-            "port": "25565",
-            "secret": "eeNEgYdJvXrFGRMCIMJdCQtY2RueWVrdGFuZXQuY29tZmFyYWthdi5jb212YW4ubmFqdmEuY29tAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-            "link": "tg://proxy?server=champagne.limoozin.info&port=25565&secret=eeNEgYdJvXrFGRMCIMJdCQtY2RueWVrdGFuZXQuY29tZmFyYWthdi5jb212YW4ubmFqdmEuY29tAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-            "ping": 20
-        },
-        {
-            "server": "wine.limoozin.info",
-            "port": "25565",
-            "secret": "eeNEgYdJvXrFGRMCIMJdCQ",
-            "link": "tg://proxy?server=wine.limoozin.info&amp;port=25565&amp;secret=eeNEgYdJvXrFGRMCIMJdCQ",
-            "ping": 20
-        },
-        {
-            "server": "wine.limoozin.info",
-            "port": "25565",
-            "secret": "eeNEgYdJvXrFGRMCIMJdCQ",
-            "link": "tg://proxy?server=wine.limoozin.info&port=25565&secret=eeNEgYdJvXrFGRMCIMJdCQ",
-            "ping": 20
-        },
         {
             "server": "www.download-fast.co.uk",
             "port": "443",
             "secret": "dd10dadd1e7c27a20098abb5bf53ca26a8",
-            "link": "tg://proxy?server=www.download-fast.co.uk&port=443&secret=dd10dadd1e7c27a20098abb5bf53ca26a8",
-            "ping": 26
+            "link": "tg://proxy?server=www.download-fast.co.uk&amp;port=443&amp;secret=dd10dadd1e7c27a20098abb5bf53ca26a8",
+            "ping": 91
         },
         {
             "server": "185.84.156.8",
             "port": "4515",
             "secret": "eee9a4f23b1d768c04a8d7f39120ca5b6e626973636f7474692e79656b74616e65742e636f6d",
             "link": "tg://proxy?server=185.84.156.8&port=4515&secret=eee9a4f23b1d768c04a8d7f39120ca5b6e626973636f7474692e79656b74616e65742e636f6d",
-            "ping": 95
+            "ping": 96
         },
         {
             "server": "www.download-fast.co.uk",
             "port": "443",
             "secret": "dd10dadd1e7c27a20098abb5bf53ca26a8",
-            "link": "tg://proxy?server=www.download-fast.co.uk&amp;port=443&amp;secret=dd10dadd1e7c27a20098abb5bf53ca26a8",
-            "ping": 101
+            "link": "tg://proxy?server=www.download-fast.co.uk&port=443&secret=dd10dadd1e7c27a20098abb5bf53ca26a8",
+            "ping": 99
         },
         {
-            "server": "web.revised-packet-chrome.info.",
+            "server": "chetori-filterchi.tlgstars.info.",
             "port": "42341",
             "secret": "7nnnAQIAAQAH8AMDhuJMOt0%3D",
-            "link": "tg://proxy?server=web.revised-packet-chrome.info.&port=42341&secret=7nnnAQIAAQAH8AMDhuJMOt0%3D",
-            "ping": 105
-        },
-        {
-            "server": "michael.jordanair.info",
-            "port": "8443",
-            "secret": "eeNEgYdJvXrFGRMCIMJdCQtY2RueWVrdGFuZXQuY29tZmFyYWthdi5jb212YW4ubmFqdmEuY29tAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-            "link": "tg://proxy?server=michael.jordanair.info&amp;port=8443&amp;secret=eeNEgYdJvXrFGRMCIMJdCQtY2RueWVrdGFuZXQuY29tZmFyYWthdi5jb212YW4ubmFqdmEuY29tAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+            "link": "tg://proxy?server=chetori-filterchi.tlgstars.info.&port=42341&secret=7nnnAQIAAQAH8AMDhuJMOt0%3D",
             "ping": 107
         },
         {
-            "server": "www.rasht-e-nazanin.info.",
-            "port": "2083",
-            "secret": "ee1603010200010001fc030386e24c3add68656c702e737465616d706f77657265642e636f6d",
-            "link": "tg://proxy?server=www.rasht-e-nazanin.info.&port=2083&secret=ee1603010200010001fc030386e24c3add68656c702e737465616d706f77657265642e636f6d",
-            "ping": 109
+            "server": "udp.road-digger.info.",
+            "port": "61016",
+            "secret": "7nnnAQIAAQAH8AMDhuJMOt0%3D",
+            "link": "tg://proxy?server=udp.road-digger.info.&port=61016&secret=7nnnAQIAAQAH8AMDhuJMOt0%3D",
+            "ping": 108
         },
         {
-            "server": "rasm.tigerdr.info",
+            "server": "oh.ajab-soorati-dare.info",
+            "port": "42341",
+            "secret": "7nnnAQIAAQAH8AMDhuJMOt0%3D",
+            "link": "tg://proxy?server=oh.ajab-soorati-dare.info&port=42341&secret=7nnnAQIAAQAH8AMDhuJMOt0%3D",
+            "ping": 108
+        },
+        {
+            "server": "95.217.135.241",
             "port": "443",
-            "secret": "ee1603010200010001fc030386e24c3add626973636f7474692e79656b74616e65742e636f6d",
-            "link": "tg://proxy?server=rasm.tigerdr.info&port=443&secret=ee1603010200010001fc030386e24c3add626973636f7474692e79656b74616e65742e636f6d",
-            "ping": 110
+            "secret": "7pJZSUjIp-43RmluNUkNmWNkbnMuZ18vZ3xlLmNvbQ%3D%3D",
+            "link": "tg://proxy?server=95.217.135.241&port=443&ref_secret-share=@mtprotoproxies&secret=7pJZSUjIp-43RmluNUkNmWNkbnMuZ18vZ3xlLmNvbQ%3D%3D",
+            "ping": 117
         },
         {
             "server": "95.217.135.241",
             "port": "443",
             "secret": "7pJZSUjIp-43RmluNUkNmWNkbnMuZ29vZ2xlLmNvbG%3D%3D",
             "link": "tg://proxy?server=95.217.135.241&port=443&ref_secret-share=@mtprotoproxies&secret=7pJZSUjIp-43RmluNUkNmWNkbnMuZ29vZ2xlLmNvbG%3D%3D",
-            "ping": 116
-        },
-        {
-            "server": "95.217.135.241",
-            "port": "443",
-            "secret": "7pJZSUjIp-43RmluNUkNmWNkbnMuZ15vZ2xlLmNvbQ%3D%3D",
-            "link": "tg://proxy?server=95.217.135.241&port=443&ref_secret-share=@mtprotoproxies&secret=7pJZSUjIp-43RmluNUkNmWNkbnMuZ15vZ2xlLmNvbQ%3D%3D",
             "ping": 117
         },
         {
-            "server": "tajer.lavest.info",
+            "server": "37.27.135.205",
             "port": "443",
-            "secret": "ee1603010200010001fc030386e24c3add626973636f7474692e79656b74616e65742e636f6d",
-            "link": "tg://proxy?server=tajer.lavest.info&port=443&secret=ee1603010200010001fc030386e24c3add626973636f7474692e79656b74616e65742e636f6d",
-            "ping": 117
-        },
-        {
-            "server": "95.217.135.241",
-            "port": "443",
-            "secret": "7pJZSUjIp-43RmluNUkNmWNkbnMuZ29vZ2xlImNvbG%3D%3D",
-            "link": "tg://proxy?server=95.217.135.241&port=443&ref_secret-share=@mtprotoproxies&secret=7pJZSUjIp-43RmluNUkNmWNkbnMuZ29vZ2xlImNvbG%3D%3D",
-            "ping": 117
-        },
-        {
-            "server": "95.217.135.241",
-            "port": "443",
-            "secret": "7pJZSUjIp-43RmluNUkNmWNkbnMuZ29vZ2clLmNvbQ%3D%3D",
-            "link": "tg://proxy?server=95.217.135.241&port=443&ref_secret-share=@mtprotoproxies&secret=7pJZSUjIp-43RmluNUkNmWNkbnMuZ29vZ2clLmNvbQ%3D%3D",
-            "ping": 117
-        },
-        {
-            "server": "95.217.135.241",
-            "port": "443",
-            "secret": "7pJZSUjIp-43RmluNUkNmWNkbnMuZ14vZ2xlLmNvbQ%3D%3D",
-            "link": "tg://proxy?server=95.217.135.241&port=443&ref_secret-share=@mtprotoproxies&secret=7pJZSUjIp-43RmluNUkNmWNkbnMuZ14vZ2xlLmNvbQ%3D%3D",
+            "secret": "dd0000f00f0f775555fffffff5006e2e69",
+            "link": "tg://proxy?server=37.27.135.205&amp;port=443&amp;secret=dd0000f00f0f775555fffffff5006e2e69",
             "ping": 117
         },
         {
@@ -137,30 +81,9 @@
         {
             "server": "95.217.135.241",
             "port": "443",
-            "secret": "7pJZSUjIp-43RmluNUkNmWNkbnMuZ18vZ2xlLmNvbQ%3D%3D",
-            "link": "tg://proxy?server=95.217.135.241&port=443&ref_secret-share=@mtprotoproxies&secret=7pJZSUjIp-43RmluNUkNmWNkbnMuZ18vZ2xlLmNvbQ%3D%3D",
+            "secret": "7pJZSUjIp-43RmluNUkNmWNkbnMuZ28vZ2xlImNvbG%3D%3D",
+            "link": "tg://proxy?server=95.217.135.241&port=443&ref_secret-share=@mtprotoproxies&secret=7pJZSUjIp-43RmluNUkNmWNkbnMuZ28vZ2xlImNvbG%3D%3D",
             "ping": 117
-        },
-        {
-            "server": "37.27.135.207",
-            "port": "443",
-            "secret": "dd0000f00f0f775555fffffff5006e2e69",
-            "link": "tg://proxy?server=37.27.135.207&amp;port=443&amp;secret=dd0000f00f0f775555fffffff5006e2e69",
-            "ping": 118
-        },
-        {
-            "server": "37.27.135.205",
-            "port": "443",
-            "secret": "dd0000f00f0f775555fffffff5006e2e69",
-            "link": "tg://proxy?server=37.27.135.205&amp;port=443&amp;secret=dd0000f00f0f775555fffffff5006e2e69",
-            "ping": 118
-        },
-        {
-            "server": "95.217.135.241",
-            "port": "443",
-            "secret": "7pJZSUjIp-43RmluNUkNmWNkbnMuZ18vZ3xlLmNvbQ%3D%3D",
-            "link": "tg://proxy?server=95.217.135.241&port=443&ref_secret-share=@mtprotoproxies&secret=7pJZSUjIp-43RmluNUkNmWNkbnMuZ18vZ3xlLmNvbQ%3D%3D",
-            "ping": 118
         },
         {
             "server": "65.21.28.60",
@@ -172,15 +95,22 @@
         {
             "server": "95.217.135.241",
             "port": "443",
-            "secret": "7pJZSUjIp-43RmluNUkNmWNkbnMuZ11vZ2xlLmNvbQ%3D%3D",
-            "link": "tg://proxy?server=95.217.135.241&port=443&ref_secret-share=@mtprotoproxies&secret=7pJZSUjIp-43RmluNUkNmWNkbnMuZ11vZ2xlLmNvbQ%3D%3D",
+            "secret": "7pJZSUjIp-43RmluNUkNmWNkbnMuZ29vZ2clLmNvbQ%3D%3D",
+            "link": "tg://proxy?server=95.217.135.241&port=443&ref_secret-share=@mtprotoproxies&secret=7pJZSUjIp-43RmluNUkNmWNkbnMuZ29vZ2clLmNvbQ%3D%3D",
             "ping": 118
         },
         {
             "server": "95.217.135.241",
             "port": "443",
-            "secret": "7pJZSUjIp-43RmluNUkNmWNkbnMuZ19vZ2xlLmNvbQ%3D%3D",
-            "link": "tg://proxy?server=95.217.135.241&port=443&ref_secret-share=@mtprotoproxies&secret=7pJZSUjIp-43RmluNUkNmWNkbnMuZ19vZ2xlLmNvbQ%3D%3D",
+            "secret": "7pJZSUjIp-43RmluNUkNmWNkbnMuZ15vZ2xlLmNvbQ%3D%3D",
+            "link": "tg://proxy?server=95.217.135.241&port=443&ref_secret-share=@mtprotoproxies&secret=7pJZSUjIp-43RmluNUkNmWNkbnMuZ15vZ2xlLmNvbQ%3D%3D",
+            "ping": 118
+        },
+        {
+            "server": "65.109.24.37",
+            "port": "8080",
+            "secret": "dd49a70de57a60174f18dfd7fe6ef6aaf5",
+            "link": "tg://proxy?server=65.109.24.37&port=8080&secret=dd49a70de57a60174f18dfd7fe6ef6aaf5",
             "ping": 118
         },
         {
@@ -193,22 +123,50 @@
         {
             "server": "95.217.135.241",
             "port": "443",
-            "secret": "7pJZSUjIp-43RmluNUkNmWNkbnMuZ28vZ2xlImNvbG%3D%3D",
-            "link": "tg://proxy?server=95.217.135.241&port=443&ref_secret-share=@mtprotoproxies&secret=7pJZSUjIp-43RmluNUkNmWNkbnMuZ28vZ2xlImNvbG%3D%3D",
-            "ping": 119
+            "secret": "7pJZSUjIp-43RmluNUkNmWNkbnMuZ19vZ2xlLmNvbQ%3D%3D",
+            "link": "tg://proxy?server=95.217.135.241&port=443&ref_secret-share=@mtprotoproxies&secret=7pJZSUjIp-43RmluNUkNmWNkbnMuZ19vZ2xlLmNvbQ%3D%3D",
+            "ping": 118
+        },
+        {
+            "server": "95.217.135.241",
+            "port": "443",
+            "secret": "7pJZSUjIp-43RmluNUkNmWNkbnMuZ11vZ2xlLmNvbQ%3D%3D",
+            "link": "tg://proxy?server=95.217.135.241&port=443&ref_secret-share=@mtprotoproxies&secret=7pJZSUjIp-43RmluNUkNmWNkbnMuZ11vZ2xlLmNvbQ%3D%3D",
+            "ping": 118
+        },
+        {
+            "server": "37.27.135.207",
+            "port": "443",
+            "secret": "dd0000f00f0f775555fffffff5006e2e69",
+            "link": "tg://proxy?server=37.27.135.207&amp;port=443&amp;secret=dd0000f00f0f775555fffffff5006e2e69",
+            "ping": 118
+        },
+        {
+            "server": "95.217.135.241",
+            "port": "443",
+            "secret": "7pJZSUjIp-43RmluNUkNmWNkbnMuZ29vZ2xlImNvbG%3D%3D",
+            "link": "tg://proxy?server=95.217.135.241&port=443&ref_secret-share=@mtprotoproxies&secret=7pJZSUjIp-43RmluNUkNmWNkbnMuZ29vZ2xlImNvbG%3D%3D",
+            "ping": 118
+        },
+        {
+            "server": "95.217.135.241",
+            "port": "443",
+            "secret": "7pJZSUjIp-43RmluNUkNmWNkbnMuZ14vZ2xlLmNvbQ%3D%3D",
+            "link": "tg://proxy?server=95.217.135.241&port=443&ref_secret-share=@mtprotoproxies&secret=7pJZSUjIp-43RmluNUkNmWNkbnMuZ14vZ2xlLmNvbQ%3D%3D",
+            "ping": 118
         },
         {
             "server": "65.109.42.32",
             "port": "443",
             "secret": "ProxyQavi____ProxymelgACM4eFlnUldQOFpvTHVwZmNpaVI2ZkJFNDJMSXJxUW1yT2s4YzRCaVRaLi11cGRhdAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
             "link": "tg://proxy?server=65.109.42.32&port=443&secret=ProxyQavi____ProxymelgACM4eFlnUldQOFpvTHVwZmNpaVI2ZkJFNDJMSXJxUW1yT2s4YzRCaVRaLi11cGRhdAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-            "ping": 119
+            "ping": 118
         },
         {
-            "server": "65.109.24.37",
-            "port": "8080",
-            "secret": "dd49a70de57a60174f18dfd7fe6ef6aaf5",
-            "link": "tg://proxy?server=65.109.24.37&port=8080&secret=dd49a70de57a60174f18dfd7fe6ef6aaf5",
+            "server": "95.217.135.241",
+            "port": "443",
+            "secret": "7pJZSUjIp-43RmluNUkNmWNkbnMuZ18vZ2xlLmNvbQ%3D%3D",
+            "link": "tg://proxy?server=95.217.135.241&port=443&ref_secret-share=@mtprotoproxies&secret=7pJZSUjIp-43RmluNUkNmWNkbnMuZ18vZ2xlLmNvbQ%3D%3D",
             "ping": 119
         },
         {
@@ -216,146 +174,160 @@
             "port": "443",
             "secret": "eecBAgABAAfwAwOG4kw63QAAAARueWVrdGFuZXQuY29tZmFyYWthdi5jb212YW4ubmFqdmEuY29tAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
             "link": "tg://proxy?server=65.109.217.21&port=443&secret=eecBAgABAAfwAwOG4kw63QAAAARueWVrdGFuZXQuY29tZmFyYWthdi5jb212YW4ubmFqdmEuY29tAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-            "ping": 119
-        },
-        {
-            "server": "kalakbaz.kalakbazi-co.co.uk",
-            "port": "443",
-            "secret": "ee1603010200010001fc030386e24c3add626973636F7474692E79656B74616E65742E636F6D",
-            "link": "tg://proxy?server=kalakbaz.kalakbazi-co.co.uk&amp;port=443&amp;secret=ee1603010200010001fc030386e24c3add626973636F7474692E79656B74616E65742E636F6D",
-            "ping": 135
-        },
-        {
-            "server": "mizanesgh.co.uk.",
-            "port": "23",
-            "secret": "eeNEgYdJvXrFGRMCIMJdCQtY2RueWVrdGFuZXQuY29tZmFyYWthdi5jb212YW4ubmFqdmEuY29tAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-            "link": "tg://proxy?server=mizanesgh.co.uk.&port=23&secret=eeNEgYdJvXrFGRMCIMJdCQtY2RueWVrdGFuZXQuY29tZmFyYWthdi5jb212YW4ubmFqdmEuY29tAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-            "ping": 136
-        },
-        {
-            "server": "android.gq.the-bests-servers.info",
-            "port": "88",
-            "secret": "7nnnAQIAAQAH8AMDhuJMOt0%3D",
-            "link": "tg://proxy?server=android.gq.the-bests-servers.info&port=88&secret=7nnnAQIAAQAH8AMDhuJMOt0%3D",
-            "ping": 136
-        },
-        {
-            "server": "www.website-best.info",
-            "port": "443",
-            "secret": "ee1603010200010001fc030386e24c3ad37765622e79656b74616e65742e636f6d",
-            "link": "tg://proxy?server=www.website-best.info&amp;port=443&amp;secret=ee1603010200010001fc030386e24c3ad37765622e79656b74616e65742e636f6d",
-            "ping": 136
-        },
-        {
-            "server": "chetori-filterchi.tlgstars.info.",
-            "port": "42341",
-            "secret": "7nnnAQIAAQAH8AMDhuJMOt0%3D",
-            "link": "tg://proxy?server=chetori-filterchi.tlgstars.info.&port=42341&secret=7nnnAQIAAQAH8AMDhuJMOt0%3D",
-            "ping": 138
-        },
-        {
-            "server": "fuul.siteliveim.space",
-            "port": "443",
-            "secret": "ee0000f00f0f775555fffffff5006e2e697961686f6f2e636f6d",
-            "link": "tg://proxy?server=fuul.siteliveim.space&amp;port=443&amp;secret=ee0000f00f0f775555fffffff5006e2e697961686f6f2e636f6d",
-            "ping": 156
-        },
-        {
-            "server": "god.gamelande.info.",
-            "port": "88",
-            "secret": "7nnnAQIAAQAH8AMDhuJMOt0%3D",
-            "link": "tg://proxy?server=god.gamelande.info.&port=88&secret=7nnnAQIAAQAH8AMDhuJMOt0%3D",
-            "ping": 157
-        },
-        {
-            "server": "god.gamelande.info.",
-            "port": "88",
-            "secret": "7nnnAQIAAQAH8AMDhuJMOt0%3D",
-            "link": "tg://proxy?server=god.gamelande.info.&amp;port=88&amp;secret=7nnnAQIAAQAH8AMDhuJMOt0%3D",
-            "ping": 162
+            "ping": 120
         },
         {
             "server": "champagne.limoozin.info",
             "port": "25565",
             "secret": "eeNEgYdJvXrFGRMCIMJdCQtY2RueWVrdGFuZXQuY29tZmFyYWthdi5jb212YW4ubmFqdmEuY29tAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
             "link": "tg://proxy?server=champagne.limoozin.info&amp;port=25565&amp;secret=eeNEgYdJvXrFGRMCIMJdCQtY2RueWVrdGFuZXQuY29tZmFyYWthdi5jb212YW4ubmFqdmEuY29tAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-            "ping": 174
+            "ping": 127
         },
         {
-            "server": "pretty.dokhtarbandari.info.",
-            "port": "22",
-            "secret": "eeNEgYdJvXrFGRMCIMJdCQ",
-            "link": "tg://proxy?server=pretty.dokhtarbandari.info.&amp;port=22&amp;secret=eeNEgYdJvXrFGRMCIMJdCQ",
-            "ping": 179
+            "server": "champagne.limoozin.info",
+            "port": "25565",
+            "secret": "eeNEgYdJvXrFGRMCIMJdCQtY2RueWVrdGFuZXQuY29tZmFyYWthdi5jb212YW4ubmFqdmEuY29tAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+            "link": "tg://proxy?server=champagne.limoozin.info&port=25565&secret=eeNEgYdJvXrFGRMCIMJdCQtY2RueWVrdGFuZXQuY29tZmFyYWthdi5jb212YW4ubmFqdmEuY29tAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+            "ping": 129
         },
         {
             "server": "www.karako.co.uk",
             "port": "600",
             "secret": "ee1603010200010001fc030386e24c3add626973636F7474692E79656B74616E65742E636F6D",
             "link": "tg://proxy?server=www.karako.co.uk&amp;port=600&amp;secret=ee1603010200010001fc030386e24c3add626973636F7474692E79656B74616E65742E636F6D",
-            "ping": 210
+            "ping": 142
         },
         {
-            "server": "michael.jordanair.info",
-            "port": "8443",
-            "secret": "eeNEgYdJvXrFGRMCIMJdCQtY2RueWVrdGFuZXQuY29tZmFyYWthdi5jb212YW4ubmFqdmEuY29tAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-            "link": "tg://proxy?server=michael.jordanair.info&port=8443&secret=eeNEgYdJvXrFGRMCIMJdCQtY2RueWVrdGFuZXQuY29tZmFyYWthdi5jb212YW4ubmFqdmEuY29tAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-            "ping": 221
-        },
-        {
-            "server": "Hamrah.mci.ir.the-bests-servers.info.",
-            "port": "88",
+            "server": "settings.appsettings.info.",
+            "port": "42341",
             "secret": "7nnnAQIAAQAH8AMDhuJMOt0%3D",
-            "link": "tg://proxy?server=Hamrah.mci.ir.the-bests-servers.info.&port=88&secret=7nnnAQIAAQAH8AMDhuJMOt0%3D",
-            "ping": 227
-        },
-        {
-            "server": "www.x9q.pw",
-            "port": "8443",
-            "secret": "3XnnAQIAAQAH8AMDhuJMOt0",
-            "link": "tg://proxy?server=www.x9q.pw&port=8443&secret=3XnnAQIAAQAH8AMDhuJMOt0=",
-            "ping": 235
-        },
-        {
-            "server": "www.road-digger.info.",
-            "port": "61016",
-            "secret": "7nnnAQIAAQAH8AMDhuJMOt0%3D",
-            "link": "tg://proxy?server=www.road-digger.info.&port=61016&secret=7nnnAQIAAQAH8AMDhuJMOt0%3D",
-            "ping": 239
+            "link": "tg://proxy?server=settings.appsettings.info.&port=42341&secret=7nnnAQIAAQAH8AMDhuJMOt0%3D",
+            "ping": 159
         },
         {
             "server": "tools.xcode-learn.info.",
             "port": "42341",
             "secret": "7nnnAQIAAQAH8AMDhuJMOt0%3D",
             "link": "tg://proxy?server=tools.xcode-learn.info.&port=42341&secret=7nnnAQIAAQAH8AMDhuJMOt0%3D",
-            "ping": 245
+            "ping": 164
         },
         {
-            "server": "ssh.gamelande.info.",
+            "server": "wine.limoozin.info",
+            "port": "25565",
+            "secret": "eeNEgYdJvXrFGRMCIMJdCQ",
+            "link": "tg://proxy?server=wine.limoozin.info&port=25565&secret=eeNEgYdJvXrFGRMCIMJdCQ",
+            "ping": 174
+        },
+        {
+            "server": "wine.limoozin.info",
+            "port": "25565",
+            "secret": "eeNEgYdJvXrFGRMCIMJdCQ",
+            "link": "tg://proxy?server=wine.limoozin.info&amp;port=25565&amp;secret=eeNEgYdJvXrFGRMCIMJdCQ",
+            "ping": 176
+        },
+        {
+            "server": "wine.limoozin.info",
+            "port": "25565",
+            "secret": "eeNEgYdJvXrFGRMCIMJdCQtY2RueWVrdGFuZXQuY29tZmFyYWthdi5jb212YW4ubmFqdmEuY29tAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+            "link": "tg://proxy?server=wine.limoozin.info&amp;port=25565&amp;secret=eeNEgYdJvXrFGRMCIMJdCQtY2RueWVrdGFuZXQuY29tZmFyYWthdi5jb212YW4ubmFqdmEuY29tAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+            "ping": 180
+        },
+        {
+            "server": "god.gamelande.info.",
             "port": "88",
             "secret": "7nnnAQIAAQAH8AMDhuJMOt0%3D",
-            "link": "tg://proxy?server=ssh.gamelande.info.&amp;port=88&amp;secret=7nnnAQIAAQAH8AMDhuJMOt0%3D",
-            "ping": 246
+            "link": "tg://proxy?server=god.gamelande.info.&port=88&secret=7nnnAQIAAQAH8AMDhuJMOt0%3D",
+            "ping": 183
         },
         {
-            "server": "https.abr-parvaz.info.",
-            "port": "42341",
-            "secret": "7nnnAQIAAQAH8AMDhuJMOt0%3D",
-            "link": "tg://proxy?server=https.abr-parvaz.info.&port=42341&secret=7nnnAQIAAQAH8AMDhuJMOt0%3D",
-            "ping": 249
+            "server": "fuul.siteliveim.space",
+            "port": "443",
+            "secret": "ee0000f00f0f775555fffffff5006e2e697961686f6f2e636f6d",
+            "link": "tg://proxy?server=fuul.siteliveim.space&amp;port=443&amp;secret=ee0000f00f0f775555fffffff5006e2e697961686f6f2e636f6d",
+            "ping": 209
+        },
+        {
+            "server": "pretty.dokhtarbandari.info.",
+            "port": "22",
+            "secret": "eeNEgYdJvXrFGRMCIMJdCQ",
+            "link": "tg://proxy?server=pretty.dokhtarbandari.info.&amp;port=22&amp;secret=eeNEgYdJvXrFGRMCIMJdCQ",
+            "ping": 209
         },
         {
             "server": "https-cdn-ddns.dnstls.info.",
             "port": "88",
             "secret": "7nnnAQIAAQAH8AMDhuJMOt0%3D",
             "link": "tg://proxy?server=https-cdn-ddns.dnstls.info.&port=88&secret=7nnnAQIAAQAH8AMDhuJMOt0%3D",
-            "ping": 261
+            "ping": 213
+        },
+        {
+            "server": "rasm.tigerdr.info",
+            "port": "443",
+            "secret": "ee1603010200010001fc030386e24c3add626973636f7474692e79656b74616e65742e636f6d",
+            "link": "tg://proxy?server=rasm.tigerdr.info&port=443&secret=ee1603010200010001fc030386e24c3add626973636f7474692e79656b74616e65742e636f6d",
+            "ping": 217
         },
         {
             "server": "tar.salko.info",
             "port": "443",
             "secret": "ee1603010200010001fc030386e24c3add626973636f7474692e79656b74616e65742e636f6d",
             "link": "tg://proxy?server=tar.salko.info&port=443&secret=ee1603010200010001fc030386e24c3add626973636f7474692e79656b74616e65742e636f6d",
+            "ping": 218
+        },
+        {
+            "server": "kalakbaz.kalakbazi-co.co.uk",
+            "port": "443",
+            "secret": "ee1603010200010001fc030386e24c3add626973636F7474692E79656B74616E65742E636F6D",
+            "link": "tg://proxy?server=kalakbaz.kalakbazi-co.co.uk&amp;port=443&amp;secret=ee1603010200010001fc030386e24c3add626973636F7474692E79656B74616E65742E636F6D",
+            "ping": 219
+        },
+        {
+            "server": "tajer.lavest.info",
+            "port": "443",
+            "secret": "ee1603010200010001fc030386e24c3add626973636f7474692e79656b74616e65742e636f6d",
+            "link": "tg://proxy?server=tajer.lavest.info&port=443&secret=ee1603010200010001fc030386e24c3add626973636f7474692e79656b74616e65742e636f6d",
+            "ping": 219
+        },
+        {
+            "server": "ssh.gamelande.info.",
+            "port": "88",
+            "secret": "7nnnAQIAAQAH8AMDhuJMOt0%3D",
+            "link": "tg://proxy?server=ssh.gamelande.info.&amp;port=88&amp;secret=7nnnAQIAAQAH8AMDhuJMOt0%3D",
+            "ping": 240
+        },
+        {
+            "server": "hamrah-aval-pq.omide-hasti.info.",
+            "port": "88",
+            "secret": "7nnnAQIAAQAH8AMDhuJMOt0%3D",
+            "link": "tg://proxy?server=hamrah-aval-pq.omide-hasti.info.&port=88&secret=7nnnAQIAAQAH8AMDhuJMOt0%3D",
+            "ping": 241
+        },
+        {
+            "server": "always.paradiselandi.info",
+            "port": "4515",
+            "secret": "eee9a4f23b1d768c04a8d7f39120ca5b6e626973636f7474692e79656b74616e65742e636f6d",
+            "link": "tg://proxy?server=always.paradiselandi.info&port=4515&secret=eee9a4f23b1d768c04a8d7f39120ca5b6e626973636f7474692e79656b74616e65742e636f6d",
+            "ping": 257
+        },
+        {
+            "server": "web.revised-packet-chrome.info.",
+            "port": "42341",
+            "secret": "7nnnAQIAAQAH8AMDhuJMOt0%3D",
+            "link": "tg://proxy?server=web.revised-packet-chrome.info.&port=42341&secret=7nnnAQIAAQAH8AMDhuJMOt0%3D",
+            "ping": 262
+        },
+        {
+            "server": "Hamrah.mci.ir.the-bests-servers.info.",
+            "port": "88",
+            "secret": "7nnnAQIAAQAH8AMDhuJMOt0%3D",
+            "link": "tg://proxy?server=Hamrah.mci.ir.the-bests-servers.info.&port=88&secret=7nnnAQIAAQAH8AMDhuJMOt0%3D",
+            "ping": 262
+        },
+        {
+            "server": "michael.jordanair.info",
+            "port": "8443",
+            "secret": "eeNEgYdJvXrFGRMCIMJdCQtY2RueWVrdGFuZXQuY29tZmFyYWthdi5jb212YW4ubmFqdmEuY29tAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+            "link": "tg://proxy?server=michael.jordanair.info&amp;port=8443&amp;secret=eeNEgYdJvXrFGRMCIMJdCQtY2RueWVrdGFuZXQuY29tZmFyYWthdi5jb212YW4ubmFqdmEuY29tAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
             "ping": 263
         },
         {
@@ -366,130 +338,158 @@
             "ping": 264
         },
         {
-            "server": "udp.road-digger.info.",
-            "port": "61016",
-            "secret": "7nnnAQIAAQAH8AMDhuJMOt0%3D",
-            "link": "tg://proxy?server=udp.road-digger.info.&port=61016&secret=7nnnAQIAAQAH8AMDhuJMOt0%3D",
+            "server": "www.website-best.info",
+            "port": "443",
+            "secret": "ee1603010200010001fc030386e24c3ad37765622e79656b74616e65742e636f6d",
+            "link": "tg://proxy?server=www.website-best.info&amp;port=443&amp;secret=ee1603010200010001fc030386e24c3ad37765622e79656b74616e65742e636f6d",
             "ping": 265
         },
         {
-            "server": "oh.ajab-soorati-dare.info",
-            "port": "42341",
-            "secret": "7nnnAQIAAQAH8AMDhuJMOt0%3D",
-            "link": "tg://proxy?server=oh.ajab-soorati-dare.info&port=42341&secret=7nnnAQIAAQAH8AMDhuJMOt0%3D",
-            "ping": 266
-        },
-        {
-            "server": "www.borcatsion.info.",
-            "port": "9009",
-            "secret": "ee1603010200010001fc030386e24c3ad37765622e79656b74616e65742e636f6d",
-            "link": "tg://proxy?server=www.borcatsion.info.&amp;port=9009&amp;secret=ee1603010200010001fc030386e24c3ad37765622e79656b74616e65742e636f6d",
-            "ping": 271
-        },
-        {
-            "server": "always.paradiselandi.info",
-            "port": "4515",
-            "secret": "eee9a4f23b1d768c04a8d7f39120ca5b6e626973636f7474692e79656b74616e65742e636f6d",
-            "link": "tg://proxy?server=always.paradiselandi.info&port=4515&secret=eee9a4f23b1d768c04a8d7f39120ca5b6e626973636f7474692e79656b74616e65742e636f6d",
-            "ping": 276
-        },
-        {
-            "server": "hamrah-aval-pq.omide-hasti.info.",
-            "port": "88",
-            "secret": "7nnnAQIAAQAH8AMDhuJMOt0%3D",
-            "link": "tg://proxy?server=hamrah-aval-pq.omide-hasti.info.&port=88&secret=7nnnAQIAAQAH8AMDhuJMOt0%3D",
-            "ping": 287
-        },
-        {
-            "server": "down.permiumdl.info",
-            "port": "42341",
-            "secret": "7nnnAQIAAQAH8AMDhuJMOt0%3D",
-            "link": "tg://proxy?server=down.permiumdl.info&port=42341&secret=7nnnAQIAAQAH8AMDhuJMOt0%3D",
-            "ping": 287
-        },
-        {
-            "server": "request.postmanreq.info.",
-            "port": "42341",
-            "secret": "7nnnAQIAAQAH8AMDhuJMOt0%3D",
-            "link": "tg://proxy?server=request.postmanreq.info.&port=42341&secret=7nnnAQIAAQAH8AMDhuJMOt0%3D",
-            "ping": 290
+            "server": "www.rasht-e-nazanin.info.",
+            "port": "2083",
+            "secret": "ee1603010200010001fc030386e24c3add68656c702e737465616d706f77657265642e636f6d",
+            "link": "tg://proxy?server=www.rasht-e-nazanin.info.&port=2083&secret=ee1603010200010001fc030386e24c3add68656c702e737465616d706f77657265642e636f6d",
+            "ping": 267
         },
         {
             "server": "www.lost-packet-chrome.info.",
             "port": "42341",
             "secret": "7nnnAQIAAQAH8AMDhuJMOt0%3D",
             "link": "tg://proxy?server=www.lost-packet-chrome.info.&port=42341&secret=7nnnAQIAAQAH8AMDhuJMOt0%3D",
-            "ping": 294
+            "ping": 286
         },
         {
-            "server": "proxymtproto.telwbion.com.",
-            "port": "25565",
-            "secret": "fgScoaLSXQYtLCM8VHoNngfgScoaLSXQYtLCM8VHoNngfgScoaLSXQYtLCM8VHoNngfgScoaLSXQYtLCM8VHoNngfgScoaLSXQYtLCM8VHoNngfgScoaLSXQYtLCM8VHoNngfgScoaLSXQYtLCM8VHoNng%3D%3D",
-            "link": "tg://proxy?server=proxymtproto.telwbion.com.&port=25565&secret=fgScoaLSXQYtLCM8VHoNngfgScoaLSXQYtLCM8VHoNngfgScoaLSXQYtLCM8VHoNngfgScoaLSXQYtLCM8VHoNngfgScoaLSXQYtLCM8VHoNngfgScoaLSXQYtLCM8VHoNngfgScoaLSXQYtLCM8VHoNng%3D%3D",
-            "ping": 308
+            "server": "www.road-digger.info.",
+            "port": "61016",
+            "secret": "7nnnAQIAAQAH8AMDhuJMOt0%3D",
+            "link": "tg://proxy?server=www.road-digger.info.&port=61016&secret=7nnnAQIAAQAH8AMDhuJMOt0%3D",
+            "ping": 288
         },
         {
-            "server": "settings.appsettings.info.",
+            "server": "https.abr-parvaz.info.",
             "port": "42341",
             "secret": "7nnnAQIAAQAH8AMDhuJMOt0%3D",
-            "link": "tg://proxy?server=settings.appsettings.info.&port=42341&secret=7nnnAQIAAQAH8AMDhuJMOt0%3D",
-            "ping": 314
+            "link": "tg://proxy?server=https.abr-parvaz.info.&port=42341&secret=7nnnAQIAAQAH8AMDhuJMOt0%3D",
+            "ping": 291
         },
         {
-            "server": "makeup.duhpro.makeup",
-            "port": "8443",
-            "secret": "dd79e7010200010007f0030386e24c3add",
-            "link": "tg://proxy?server=makeup.duhpro.makeup&port=8443&secret=dd79e7010200010007f0030386e24c3add",
-            "ping": 333
+            "server": "god.gamelande.info.",
+            "port": "88",
+            "secret": "7nnnAQIAAQAH8AMDhuJMOt0%3D",
+            "link": "tg://proxy?server=god.gamelande.info.&amp;port=88&amp;secret=7nnnAQIAAQAH8AMDhuJMOt0%3D",
+            "ping": 295
+        },
+        {
+            "server": "android.gq.the-bests-servers.info",
+            "port": "88",
+            "secret": "7nnnAQIAAQAH8AMDhuJMOt0%3D",
+            "link": "tg://proxy?server=android.gq.the-bests-servers.info&port=88&secret=7nnnAQIAAQAH8AMDhuJMOt0%3D",
+            "ping": 300
         },
         {
             "server": "app.x9q.pw",
             "port": "8443",
             "secret": "3XnnAQIAAQAH8AMDhuJMOt0",
             "link": "tg://proxy?server=app.x9q.pw&port=8443&secret=3XnnAQIAAQAH8AMDhuJMOt0=",
-            "ping": 337
+            "ping": 301
         },
         {
-            "server": "www.duhpro.makeup",
-            "port": "8443",
-            "secret": "dd79e7010200010007f0030386e24c3add",
-            "link": "tg://proxy?server=www.duhpro.makeup&port=8443&secret=dd79e7010200010007f0030386e24c3add",
-            "ping": 392
+            "server": "proxymtproto.telwbion.com.",
+            "port": "25565",
+            "secret": "fgScoaLSXQYtLCM8VHoNngfgScoaLSXQYtLCM8VHoNngfgScoaLSXQYtLCM8VHoNngfgScoaLSXQYtLCM8VHoNngfgScoaLSXQYtLCM8VHoNngfgScoaLSXQYtLCM8VHoNngfgScoaLSXQYtLCM8VHoNng%3D%3D",
+            "link": "tg://proxy?server=proxymtproto.telwbion.com.&port=25565&secret=fgScoaLSXQYtLCM8VHoNngfgScoaLSXQYtLCM8VHoNngfgScoaLSXQYtLCM8VHoNngfgScoaLSXQYtLCM8VHoNngfgScoaLSXQYtLCM8VHoNngfgScoaLSXQYtLCM8VHoNngfgScoaLSXQYtLCM8VHoNng%3D%3D",
+            "ping": 302
         },
         {
             "server": "www.hombus.co.uk.",
             "port": "22",
             "secret": "fgScoaLSXQYtLCM8VHoNngfgScoaLSXQYtLCM8VHoNngfgScoaLSXQYtLCM8VHoNngfgScoaLSXQYtLCM8VHoNngfgScoaLSXQYtLCM8VHoNngfgScoaLSXQYtLCM8VHoNngfgScoaLSXQYtLCM8VHoNng%3D%3D",
             "link": "tg://proxy?server=www.hombus.co.uk.&port=22&secret=fgScoaLSXQYtLCM8VHoNngfgScoaLSXQYtLCM8VHoNngfgScoaLSXQYtLCM8VHoNngfgScoaLSXQYtLCM8VHoNngfgScoaLSXQYtLCM8VHoNngfgScoaLSXQYtLCM8VHoNngfgScoaLSXQYtLCM8VHoNng%3D%3D",
-            "ping": 396
+            "ping": 311
         },
         {
-            "server": "https.uptv443.shop.",
+            "server": "down.permiumdl.info",
+            "port": "42341",
+            "secret": "7nnnAQIAAQAH8AMDhuJMOt0%3D",
+            "link": "tg://proxy?server=down.permiumdl.info&port=42341&secret=7nnnAQIAAQAH8AMDhuJMOt0%3D",
+            "ping": 315
+        },
+        {
+            "server": "www.x9q.pw",
             "port": "8443",
             "secret": "3XnnAQIAAQAH8AMDhuJMOt0",
-            "link": "tg://proxy?server=https.uptv443.shop.&port=8443&secret=3XnnAQIAAQAH8AMDhuJMOt0=",
-            "ping": 408
+            "link": "tg://proxy?server=www.x9q.pw&port=8443&secret=3XnnAQIAAQAH8AMDhuJMOt0=",
+            "ping": 321
         },
         {
             "server": "www.humaontop.space",
             "port": "443",
             "secret": "3XnnAQIAAQAH8AMDhuJMOt0",
             "link": "tg://proxy?server=www.humaontop.space&port=443&secret=3XnnAQIAAQAH8AMDhuJMOt0",
-            "ping": 428
+            "ping": 337
+        },
+        {
+            "server": "makeup.duhpro.makeup",
+            "port": "8443",
+            "secret": "dd79e7010200010007f0030386e24c3add",
+            "link": "tg://proxy?server=makeup.duhpro.makeup&port=8443&secret=dd79e7010200010007f0030386e24c3add",
+            "ping": 347
         },
         {
             "server": "www.uptv443.shop.",
             "port": "8443",
             "secret": "3XnnAQIAAQAH8AMDhuJMOt0",
             "link": "tg://proxy?server=www.uptv443.shop.&port=8443&secret=3XnnAQIAAQAH8AMDhuJMOt0=",
-            "ping": 492
+            "ping": 368
+        },
+        {
+            "server": "michael.jordanair.info",
+            "port": "8443",
+            "secret": "eeNEgYdJvXrFGRMCIMJdCQtY2RueWVrdGFuZXQuY29tZmFyYWthdi5jb212YW4ubmFqdmEuY29tAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+            "link": "tg://proxy?server=michael.jordanair.info&port=8443&secret=eeNEgYdJvXrFGRMCIMJdCQtY2RueWVrdGFuZXQuY29tZmFyYWthdi5jb212YW4ubmFqdmEuY29tAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+            "ping": 402
         },
         {
             "server": "saborbash-vasle.minetor.co.uk",
             "port": "443",
             "secret": "3XnnAQIAAQAH8AMDhuJMOt0",
             "link": "tg://proxy?server=saborbash-vasle.minetor.co.uk&port=443&secret=3XnnAQIAAQAH8AMDhuJMOt0",
-            "ping": 663
+            "ping": 479
+        },
+        {
+            "server": "www.borcatsion.info.",
+            "port": "9009",
+            "secret": "ee1603010200010001fc030386e24c3ad37765622e79656b74616e65742e636f6d",
+            "link": "tg://proxy?server=www.borcatsion.info.&amp;port=9009&amp;secret=ee1603010200010001fc030386e24c3ad37765622e79656b74616e65742e636f6d",
+            "ping": 527
+        },
+        {
+            "server": "request.postmanreq.info.",
+            "port": "42341",
+            "secret": "7nnnAQIAAQAH8AMDhuJMOt0%3D",
+            "link": "tg://proxy?server=request.postmanreq.info.&port=42341&secret=7nnnAQIAAQAH8AMDhuJMOt0%3D",
+            "ping": 534
+        },
+        {
+            "server": "mizanesgh.co.uk.",
+            "port": "23",
+            "secret": "eeNEgYdJvXrFGRMCIMJdCQtY2RueWVrdGFuZXQuY29tZmFyYWthdi5jb212YW4ubmFqdmEuY29tAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+            "link": "tg://proxy?server=mizanesgh.co.uk.&port=23&secret=eeNEgYdJvXrFGRMCIMJdCQtY2RueWVrdGFuZXQuY29tZmFyYWthdi5jb212YW4ubmFqdmEuY29tAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+            "ping": 569
+        },
+        {
+            "server": "www.duhpro.makeup",
+            "port": "8443",
+            "secret": "dd79e7010200010007f0030386e24c3add",
+            "link": "tg://proxy?server=www.duhpro.makeup&port=8443&secret=dd79e7010200010007f0030386e24c3add",
+            "ping": 578
+        },
+        {
+            "server": "https.uptv443.shop.",
+            "port": "8443",
+            "secret": "3XnnAQIAAQAH8AMDhuJMOt0",
+            "link": "tg://proxy?server=https.uptv443.shop.&port=8443&secret=3XnnAQIAAQAH8AMDhuJMOt0=",
+            "ping": 778
         }
     ]
 }
