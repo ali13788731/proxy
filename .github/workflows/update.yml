@@ -2,8 +2,11 @@ name: Proxy Auto Update
 
 on:
   schedule:
-    - cron: '*/15 * * * *' # اجرا هر 15 دقیقه
-  workflow_dispatch: # برای اجرای دستی
+    - cron: '*/10 * * * *'
+  workflow_dispatch: # برای اجرای دستی از داخل گیت‌هاب
+  repository_dispatch: # برای اجرای از طریق API (cron-job.org)
+    types: [trigger_update]
+
 
 permissions:
   contents: write
