@@ -2,7 +2,7 @@ name: Proxy Auto Update
 
 on:
   schedule:
-    - cron: '*/30 * * * *'  
+    - cron: '*/15 * * * *'  
   workflow_dispatch:
   # این ۳ خط اضافه شد تا گیت‌هاب بتواند درخواست cron-job را دریافت کند
   repository_dispatch:
