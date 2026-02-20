@@ -3,7 +3,10 @@ name: Proxy Auto Update
 on:
   schedule:
     - cron: '*/30 * * * *'  
-  workflow_dispatch:        
+  workflow_dispatch:
+  # این ۳ خط اضافه شد تا گیت‌هاب بتواند درخواست cron-job را دریافت کند
+  repository_dispatch:
+    types: [trigger_update]
 
 permissions:
   contents: write
@@ -11,22 +14,17 @@ permissions:
 jobs:
   build:
     runs-on: ubuntu-latest
-
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
-
       - name: Set up Python
         uses: actions/setup-python@v4
         with:
           python-version: '3.9'
-
       - name: Install dependencies
         run: pip install requests jdatetime
-
       - name: Run Proxy Scraper
         run: python main.py
-
       - name: Commit and Push changes
         run: |
           git config --global user.name "GitHub Action"
